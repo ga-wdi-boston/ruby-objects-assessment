@@ -10,18 +10,28 @@ finibus. Pellentesque at arcu vel libero lacinia imperdiet nec sit amet \
 nisl. Ut commodo vulputate eros, sit amet aliquet mi aliquet a. Vivamus \
 ullamcorper mauris vitae condimentum volutpat."
 
-
-def normalize_words paragraph
+# Question 1
+# Take a string and return an array of normalized words.
+# normalized words contain no punctuation and are all lower case
+def normalize_words words
 end
 
-def word_count paragraph
+# Question 2
+# Take a string and return the count of normalized words
+def word_count words
 end
 
-def unique_words paragraph
+# Question 3
+# Take a string and return and array of the unique normalized words.
+def unique_words words
 end
 
-def unique_word_count paragraph
+# Question 4
+# Take a string and return the count of unique normalized words.
+def unique_word_count words
 end
 
-def word_frequencies paragraph
+# Question 5
+# Take a string and return a Hash of the nomalized words as keys and the count for the words as the values
+def word_frequencies words
 end
