@@ -8,7 +8,7 @@ You have 30 minutes.
 
 Fork and clone this repository.
 
-Edit quiz.rb and complete each question.  You may use any resource, other than someone else in the classroom, to help you complete the quiz.  Feel free to add calls to the methods at the end of the script to check the results. Each questions will receive feedback irrespective of the answers to the other questions
+Edit quiz.rb and complete each question.  You may use any resource, other than someone else in the classroom, to help you complete the quiz.  Feel free to add calls to the methods at the end of the script to check the results. Each questions will receive feedback irrespective of the answers to the other questions.
 
 Commit and push your changes.
 
