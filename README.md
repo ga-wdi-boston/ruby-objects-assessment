@@ -1,6 +1,6 @@
 ![General Assembly Logo](http://i.imgur.com/ke8USTq.png)
 
-# Quiz:  Ruby Collections
+# Quiz: Ruby Objects
 
 You have 30 minutes.
 
