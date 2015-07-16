@@ -27,9 +27,6 @@ RSpec.describe Dog do
   end
 end
 
-RSpec.describe Answer do
-end
-
 RSpec.describe Person do
   let(:name) { "Jeff" }
   let(:age) { 29 }
