@@ -32,8 +32,15 @@ class Person
     @name, @age, @location = name, age, location
   end
 
+  def set_name(name)
+    @name = name
+  end
+
+  def set_location(location)
+    @location = location
+  end
+
   attr_reader :age
-  attr_accessor :name, :location
 
 end
 ##
