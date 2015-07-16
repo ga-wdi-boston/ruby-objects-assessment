@@ -57,8 +57,8 @@ RSpec.describe Person do
   end
 
   it 'has no setters and getters otherwise' do
-    # expect { subject.name }.to raise_error(NoMethodError)
-    # expect { subject.location }.to raise_error(NoMethodError)
+    expect { subject.name }.to raise_error(NoMethodError)
+    expect { subject.location }.to raise_error(NoMethodError)
     expect { subject.age = 30 }.to raise_error(NoMethodError)
   end
 end

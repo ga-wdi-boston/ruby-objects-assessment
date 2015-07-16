@@ -30,9 +30,9 @@ Answer.dog = Dog.new("mydog", "Golden Retriever", 15) # replace nil with your co
 
 class Person
 
-    attr_accessor :name
+    attr_writer :name
     attr_reader :age
-    attr_accessor :location
+    attr_writer :location
 
     def initialize(name, age, location)
         @name = name
