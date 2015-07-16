@@ -1,4 +1,4 @@
-require_relative '../lib/quiz.rb'
+require_relative '../lib/assessment.rb'
 
 RSpec.describe Dog do
   let(:name) { "Fido" }
