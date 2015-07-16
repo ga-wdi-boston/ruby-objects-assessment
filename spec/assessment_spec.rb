@@ -17,12 +17,15 @@ RSpec.describe Dog do
     expect(subject.instance_variables).to include(:@age)
   end
 
-  it 'has no getters or setters for required attributes' do
-    expect { subject.name }.to raise_error(NoMethodError)
+  it 'has getters for attributes' do
+    expect { subject.name }.not_to raise_error
+    expect { subject.breed }.not_to raise_error
+    expect { subject.age }.not_to raise_error
+  end
+
+  it 'has no setters for attributes' do
     expect { subject.name = "Lassie" }.to raise_error(NoMethodError)
-    expect { subject.breed }.to raise_error(NoMethodError)
     expect { subject.breed = "Collie" }.to raise_error(NoMethodError)
-    expect { subject.age }.to raise_error(NoMethodError)
     expect { subject.age = 7 }.to raise_error(NoMethodError)
   end
 end
@@ -54,8 +57,8 @@ RSpec.describe Person do
   end
 
   it 'has no setters and getters otherwise' do
-    expect { subject.name }.to raise_error(NoMethodError)
-    expect { subject.location }.to raise_error(NoMethodError)
+    # expect { subject.name }.to raise_error(NoMethodError)
+    # expect { subject.location }.to raise_error(NoMethodError)
     expect { subject.age = 30 }.to raise_error(NoMethodError)
   end
 end
