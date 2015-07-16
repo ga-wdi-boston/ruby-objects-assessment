@@ -6,10 +6,12 @@ Answer = OpenStruct.new
 # Make all of those attributes read-only.
 class Dog
   def initialize(name,breed,age)
-    attr_reader :name
-    attr_reader :breed
-    attr_reader :age
+    @name, @breed, @age = name, breed, age
   end
+
+  attr_reader :name
+  attr_reader :breed
+  attr_reader :age
 end
 
 # Question 2
@@ -23,11 +25,13 @@ Answer.dog = Dog.new("fido", "lab", 3)
 # Name and location should be writeable, but age should be read-only.
 class Person
   def initialize(name,age,location)
-    #accessor allows for read and write, is there a write only? What is it?
-    attr_accessor :name
-    attr_accessor :location
-    attr_reader :age
+    #accessor allows for read and write, is there a write only? What is it? attr_writer
+    @name, @age, @location = name, age, location
   end
+
+  attr_writer :name
+  attr_writer :location
+  attr_reader :age
 end
 
 # Question 4
