@@ -8,7 +8,7 @@ You have 30 minutes.
 
 Fork and clone this repository. Move into the cloned directory and run `bundle install`.
 
-Edit `assessment.rb` and complete each question. You may use any resource, other than someone else in the classroom, to help you complete the quiz.
+Edit `lib/assessment.rb` and complete each question. You may use any resource, other than someone else in the classroom, to help you complete the quiz.
 
 Check your answers as you work with `rspec spec/assessment_spec.rb`.
 
