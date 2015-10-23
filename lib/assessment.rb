@@ -46,8 +46,6 @@ Answer.person.location = ("Somerville")
 # Create another class called Developer that inherits from Person.
 # Give it a new public method called 'hire_for_job'
 
-
-
 class Developer < Person
 end
 
