@@ -47,7 +47,7 @@ RSpec.describe Person do
     expect(subject.instance_variables).to include(:@location)
   end
 
-  it 'has setters for name and age' do
+  it 'has setters for name and location' do
     expect { subject.name = "Matt" }.not_to raise_error
     expect { subject.location = "Cambridge" }.not_to raise_error
   end
@@ -56,9 +56,15 @@ RSpec.describe Person do
     expect { subject.age }.not_to raise_error
   end
 
-  it 'has no setters and getters otherwise' do
+  it 'has no getter for name' do
     expect { subject.name }.to raise_error(NoMethodError)
+  end
+
+  it 'has no getter for location' do
     expect { subject.location }.to raise_error(NoMethodError)
+  end
+
+  it 'has no setter for age' do
     expect { subject.age = 30 }.to raise_error(NoMethodError)
   end
 end

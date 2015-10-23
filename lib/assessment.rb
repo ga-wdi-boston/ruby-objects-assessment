@@ -17,7 +17,7 @@ Answer.dog = nil # replace nil with your code
 # Question 3
 # Create a Person class, with attributes name, age, and location.
 # It should set all three attributes when you create a new Person.
-# Name and location should be writeable, but age should be read-only.
+# Name and location should be write-only, but age should be read-only.
 
 ##
 # your code here
