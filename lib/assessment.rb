@@ -47,7 +47,9 @@ class Person
 # Then, set that Person's location to "Somerville"
 
 Answer.dave = dave.new 32 "Ohio" # replace nil with your code
-Answer.dave.location = nil # replace nil with your code
+Answer.dave.location =
+  dave.location = "Somerville"
+  puts dave.location # replace nil with your code
 
 # Question 5
 # Create another class called Developer that inherits from Person.
@@ -55,13 +57,10 @@ Answer.dave.location = nil # replace nil with your code
 
 ##
 # your code here
-class Developer < Person
-
 class Developer
   attr_accessor :hire_for_job
-  def initialize
-    super
-    @controller = eval "#{self.class.name}Controller.new(self)"
+  def initialize(hire_for_job)
+    @hire_for_job = hire_for_job
   end
 end
 
