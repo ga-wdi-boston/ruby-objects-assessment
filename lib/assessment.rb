@@ -7,12 +7,21 @@ Answer = OpenStruct.new
 
 ##
 # your code here
+class Dog
+  attr_reader :name, :breed, :age
+  def initialize(name, breed, age)
+  @name = name
+  @breed = breed
+  @age = age
+  end
+end
 ##
 
 # Question 2
 # Create a new Dog object.
 
-Answer.dog = nil # replace nil with your code
+Answer.dog = Dog.new("bianca", "bernese mountain dog", 5)
+# replace nil with your code
 
 # Question 3
 # Create a Person class, with attributes name, age, and location.
@@ -21,14 +30,23 @@ Answer.dog = nil # replace nil with your code
 
 ##
 # your code here
+class Person
+  attr_writer :name, :location
+  attr_reader :age
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 4
 # Create a new Person object using parameters "Dave", 32, and "Ohio".
 # Then, set that Person's location to "Somerville"
 
-Answer.dave = nil # replace nil with your code
-Answer.dave.location = nil # replace nil with your code
+Answer.dave = Person.new("Dave", 32, "Ohio") # replace nil with your code
+Answer.dave.location = "Somerville" # replace nil with your code
 
 # Question 5
 # Create another class called Developer that inherits from Person.
@@ -36,4 +54,9 @@ Answer.dave.location = nil # replace nil with your code
 
 ##
 # your code here
+class Developer < Person
+  def hire_for_job
+    puts "Hire me!!"
+  end
+end
 ##
