@@ -1,8 +1,8 @@
 require_relative '../lib/assessment.rb'
 
 RSpec.describe Dog do
-  let(:name) { "Fido" }
-  let(:breed) { "Mutt" }
+  let(:name) { 'Fido' }
+  let(:breed) { 'Mutt' }
   let(:age) { 10 }
 
   subject(:fido) { Dog.new(name, breed, age) }
@@ -24,16 +24,16 @@ RSpec.describe Dog do
   end
 
   it 'has no setters for attributes' do
-    expect { subject.name = "Lassie" }.to raise_error(NoMethodError)
-    expect { subject.breed = "Collie" }.to raise_error(NoMethodError)
+    expect { subject.name = 'Lassie' }.to raise_error(NoMethodError)
+    expect { subject.breed = 'Collie' }.to raise_error(NoMethodError)
     expect { subject.age = 7 }.to raise_error(NoMethodError)
   end
 end
 
 RSpec.describe Person do
-  let(:name) { "Jeff" }
+  let(:name) { 'Jeff' }
   let(:age) { 29 }
-  let(:location) { "Boston" }
+  let(:location) { 'Boston' }
 
   subject(:jeff) { Person.new(name, age, location) }
 
@@ -48,8 +48,8 @@ RSpec.describe Person do
   end
 
   it 'has setters for name and location' do
-    expect { subject.name = "Matt" }.not_to raise_error
-    expect { subject.location = "Cambridge" }.not_to raise_error
+    expect { subject.name = 'Matt' }.not_to raise_error
+    expect { subject.location = 'Cambridge' }.not_to raise_error
   end
 
   it 'has a getter for age' do
@@ -70,9 +70,9 @@ RSpec.describe Person do
 end
 
 RSpec.describe Developer do
-  let(:name) { "Jeff" }
+  let(:name) { 'Jeff' }
   let(:age) { 29 }
-  let(:location) { "Boston" }
+  let(:location) { 'Boston' }
 
   subject(:jeff) { Developer.new(name, age, location) }
 
@@ -99,8 +99,8 @@ RSpec.describe Answer do
 
   it 'has dave' do
     expect(Answer.dave).to be_a(Person)
-    expect(Answer.dave.instance_variable_get(:@name)).to eq("Dave")
+    expect(Answer.dave.instance_variable_get(:@name)).to eq('Dave')
     expect(Answer.dave.instance_variable_get(:@age)).to eq(32)
-    expect(Answer.dave.instance_variable_get(:@location)).to eq("Somerville")
+    expect(Answer.dave.instance_variable_get(:@location)).to eq('Somerville')
   end
 end
