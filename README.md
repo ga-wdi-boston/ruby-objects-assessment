@@ -23,3 +23,9 @@ Clarity: 3
 I used Google to research instance variables. [This article](https://rubymonk.com/learning/books/4-ruby-primer-ascent/chapters/45-more-classes/lessons/110-instance-variables) really helped a lot.
 ```
 
+---
+
+[License](LICENSE)
+------------------
+
+Source code distributed under the MIT license. Text and other assets copyright General Assembly, Inc., all rights reserved.
