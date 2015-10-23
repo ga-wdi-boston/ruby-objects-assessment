@@ -7,7 +7,7 @@ Answer = OpenStruct.new
 
 class Dog
 
-attr_reader :name :breed :age
+attr_reader :name, :breed, :age
 
   def initialize(name, breed, age)
     @name = name
@@ -30,7 +30,7 @@ Answer.dog =  Dog.new("Bowser", "lab", 3)
 
 class Person
 
-attr_writer :name :location
+attr_writer :name, :location
 attr_reader :age
 
   def initialize(name, age, location)
@@ -55,9 +55,9 @@ Answer.dave.location = "Somerville"
 
 class Developer < Person
 
-def hire_for_job
-puts "Hire me, (if you can afford me) :)"
-end
+  def hire_for_job
+    puts "Hire me, (if you can afford me) :)"
+  end
 
 end
 
