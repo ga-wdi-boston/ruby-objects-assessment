@@ -20,7 +20,7 @@ end
 # Question 2
 # Create a new Dog object.
 
-snoop = Dog.new("Calvin Broadus", "Snoop Dogg", 44)
+Answer.dog = Dog.new("Calvin Broadus", "Snoop Dogg", 44)
 
 # Question 3
 # Create a Person class, with attributes name, age, and location.
