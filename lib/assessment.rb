@@ -32,12 +32,13 @@ Answer.dog = Dog.new # replace nil with your code
 ##
 class Person
   attr_reader :age
-end
+  attr_accessor :name, :location
 
-def initialize(name, age, _location)
-  @name = name
-  @age = age
-  @location = age
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
 end
 
 ##
@@ -45,11 +46,9 @@ end
 # Question 4
 # Create a new Person object using parameters "Dave", 32, and "Ohio".
 # Then, set that Person's location to "Somerville"
-Person.new = ('Dave', 32, 'Somerville')
-
-
-Answer.dave =  "Dave"# replace nil with your code
-Answer.dave.location = "Somerville"# replace nil with your code
+Person.new('Dave', 32, 'Ohio')
+Answer.dave = 'Dave' # replace nil with your code
+Answer.dave.location = 'Somerville' # replace nil with your code
 
 # Question 5
 # Create another class called Developer that inherits from Person.
@@ -58,7 +57,6 @@ Answer.dave.location = "Somerville"# replace nil with your code
 ##
 class Developer < Person
   def hire_for_job
-    puts "Hire me!"
+    puts 'Hire me!'
   end
-
-##
+end
