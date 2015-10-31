@@ -44,24 +44,13 @@ class Person
   end
 end
 
- # attr_reader :age
-#   attr_accessor :name, :location
-
-#   def initialize(name, age, location)
-#     @name = name
-#     @age = age
-#     @location = location
-#   end
-# end
-
 ##
 
 # Question 4
 # Create a new Person object using parameters "Dave", 32, and "Ohio".
 # Then, set that Person's location to "Somerville"
-# Person.new('Dave', 32, 'Ohio')
-# Answer.dave = 'Dave' # replace nil with your code
-# Answer.dave.location = 'Somerville' # replace nil with your code
+Answer.dave = Person.new('Dave', '32', 'Ohio')
+Answer.dave.location = 'Somervile'
 
 # Question 5
 # Create another class called Developer that inherits from Person.
