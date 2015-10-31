@@ -11,20 +11,20 @@ class Dog
   attr_reader :breed
   attr_reader :age
 
-
   def initialize(name, breed, age)
     @name = name
     @breed = breed
     @age = age
-end
-
+  end
 end
 ##
 
 # Question 2
 # Create a new Dog object.
 
-#Answer.dog = Dog.new # replace nil with your code
+Answer.dog = Dog.new('spot', 'Lion', '45')
+
+# replace nil with your code
 
 # Question 3
 # Create a Person class, with attributes name, age, and location.
