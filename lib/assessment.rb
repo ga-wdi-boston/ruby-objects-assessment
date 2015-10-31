@@ -32,7 +32,18 @@ Answer.dog = Dog.new('spot', 'Lion', '45')
 # Name and location should be write-only, but age should be read-only.
 
 ##
-#class Person
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_accessor :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
  # attr_reader :age
 #   attr_accessor :name, :location
 
