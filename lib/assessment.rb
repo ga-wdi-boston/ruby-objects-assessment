@@ -55,11 +55,9 @@ Answer.dave.location = 'Somervile'
 # Question 5
 # Create another class called Developer that inherits from Person.
 # Give it a new public method called 'hire_for_job'
-
-##
-# class Developer < Person
-#   def hire_for_job
-#     puts 'Hire me!'
-#   end
-# end
-# end
+#
+class Developer < Person
+  def hire_for_job
+    puts 'Hire me!'
+  end
+end
