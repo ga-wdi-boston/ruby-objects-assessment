@@ -9,6 +9,18 @@ Answer = OpenStruct.new
 
 ##
 # your code here
+class Person
+  attr_reader :name, :age
+  attr_writer :name, :location
+  ## Alternatively,
+  # attr_accessor :name
+  # attr_reader :age
+  # attr_writer :location
+
+  def initialize (name, age, location)
+    @name, @age, @location = name, age, location
+  end
+end
 ##
 
 # Question 2
@@ -18,7 +30,9 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+dave = Person.new('Dave',32,'Ohio')
+dave.location = "Somerville"
+Answer.dave = dave
 #
 
 # Question 3
@@ -28,6 +42,11 @@ Answer.dave = nil
 
 ##
 # your code here
+class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -62,7 +81,7 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
 #
 ##
 
@@ -87,6 +106,12 @@ end
 
 ##
 # your code here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR"
+  end
+end
 ##
 
 # Question 6
@@ -96,8 +121,8 @@ end
 
 ##
 # your answer, in comments, here
-#
-#
+# In direct inheritance, you're limited to inheriting from a single source.
+# In composition, you can draw from as many modules as you like.
 ##
 
 # Question 7
@@ -119,16 +144,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    "kick, move, punch"
   end
 
   private
