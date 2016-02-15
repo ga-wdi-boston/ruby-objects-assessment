@@ -1,20 +1,28 @@
 ![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)
 
-# Assessment: Ruby Objects
+# Diagnostic: Ruby Objects
 
 You have 30 minutes.
 
 ## Instructions
 
-Fork and clone this repository. Move into the cloned directory and run `bundle install`.
+Fork and clone this repository.
+Move into the cloned directory and run `bundle install`.
 
-Edit `lib/assessment.rb` and complete each question. You may use any resource, other than someone else in the classroom, to help you complete the quiz.
+Edit `lib/diagnostic.rb` and complete each question.
+You may use any resource, other than someone else in the room,
+to help you complete the diagnostic.
 
-Check your answers as you work with `rspec spec/assessment_spec.rb`.
+Check your answers as you work with by running `rspec specs`.
 
 Commit and push your changes.
 
-Submit a pull request. Your pull request description should contain a "fist of five" for comfort and clarity. Additionally, you should mention the resources you used to help you complete this assessment. For example:
+When you submit your pull request, please include a "fist to five"
+for comfort and clarity in the pull request description.
+
+Additionally,
+you should mention the resources you used to help you complete this diagnostic.
+For example:
 
 ```
 Comfort: 3
