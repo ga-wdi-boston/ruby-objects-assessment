@@ -1,36 +1,6 @@
 require_relative '../lib/assessment.rb'
 
-RSpec.describe Dog do
-  let(:name) { "Fido" }
-  let(:breed) { "Mutt" }
-  let(:age) { 10 }
-
-  subject(:fido) { Dog.new(name, breed, age) }
-
-  it 'is a dog' do
-    expect(subject).to be_a(Dog)
-  end
-
-  it 'has required attributes' do
-    expect(subject.instance_variables).to include(:@name)
-    expect(subject.instance_variables).to include(:@breed)
-    expect(subject.instance_variables).to include(:@age)
-  end
-
-  it 'has getters for attributes' do
-    expect { subject.name }.not_to raise_error
-    expect { subject.breed }.not_to raise_error
-    expect { subject.age }.not_to raise_error
-  end
-
-  it 'has no setters for attributes' do
-    expect { subject.name = "Lassie" }.to raise_error(NoMethodError)
-    expect { subject.breed = "Collie" }.to raise_error(NoMethodError)
-    expect { subject.age = 7 }.to raise_error(NoMethodError)
-  end
-end
-
-RSpec.describe Person do
+RSpec.describe 'Person' do
   let(:name) { "Jeff" }
   let(:age) { 29 }
   let(:location) { "Boston" }
@@ -47,29 +17,26 @@ RSpec.describe Person do
     expect(subject.instance_variables).to include(:@location)
   end
 
+  it 'has getters for name and age' do
+    expect { subject.name }.not_to raise_error
+    expect { subject.age }.not_to raise_error
+  end
+
   it 'has setters for name and location' do
     expect { subject.name = "Matt" }.not_to raise_error
     expect { subject.location = "Cambridge" }.not_to raise_error
   end
 
-  it 'has a getter for age' do
-    expect { subject.age }.not_to raise_error
-  end
-
-  it 'has no getter for name' do
-    expect { subject.name }.to raise_error(NoMethodError)
+  it 'has no setter for age' do
+    expect { subject.age = 30 }.to raise_error(NoMethodError)
   end
 
   it 'has no getter for location' do
     expect { subject.location }.to raise_error(NoMethodError)
   end
-
-  it 'has no setter for age' do
-    expect { subject.age = 30 }.to raise_error(NoMethodError)
-  end
 end
 
-RSpec.describe Developer do
+RSpec.describe 'Developer' do
   let(:name) { "Jeff" }
   let(:age) { 29 }
   let(:location) { "Boston" }
@@ -87,12 +54,58 @@ RSpec.describe Developer do
     expect(subject.instance_variables).to include(:@location)
   end
 
-  it 'has .hire_for_job' do
-    expect { subject.hire_for_job }.not_to raise_error
+  it 'has .solve_problems' do
+    expect { subject.solve_problems }.not_to raise_error
+  end
+
+  describe '.solve_problems' do
+    it 'returns "think think think"' do
+      expect(subject.solve_problems).to eq('think think think')
+    end
   end
 end
 
-RSpec.describe Answer do
+RSpec.describe 'Lion' do
+  subject(:leo) { Lion.new }
+
+  it 'has .groom' do
+    expect { subject.groom }.not_to raise_error
+  end
+
+  it 'has .can_eat_meat?' do
+    expect { subject.can_eat_meat? }.not_to raise_error
+  end
+
+  it 'has .roar' do
+    expect { subject.groom }.not_to raise_error
+  end
+
+  describe '.roar' do
+    it 'prints out "ROAR"' do
+      expect { subject.roar }.to output("ROAR\n").to_stdout
+    end
+  end
+end
+
+RSpec.describe 'ComboAttack' do
+  it 'can chain punching, moving, and kicking' do
+    expect { ComboAttack.new.punch.move('left').kick }.not_to raise_error
+    expect { ComboAttack.new.kick.move('right').punch }.not_to raise_error
+    expect { ComboAttack.new.kick.punch.kick }.not_to raise_error
+  end
+
+  it 'has ::get_possible_moves' do
+    expect { ComboAttack.get_possible_moves }.not_to raise_error
+  end
+
+  describe '::get_possible_moves' do
+    it 'returns the string "kick, move, punch"' do
+      expect(ComboAttack.get_possible_moves).to eq("kick, move, punch")
+    end
+  end
+end
+
+RSpec.describe 'Answer' do
   it 'has a dog' do
     expect(Answer.dog).to be_a(Dog)
   end
@@ -102,5 +115,10 @@ RSpec.describe Answer do
     expect(Answer.dave.instance_variable_get(:@name)).to eq("Dave")
     expect(Answer.dave.instance_variable_get(:@age)).to eq(32)
     expect(Answer.dave.instance_variable_get(:@location)).to eq("Somerville")
+  end
+
+  it 'has housecat_noise' do
+    expect(Answer.housecat_noise).to be_a(String)
+    expect(Answer.housecat_noise).to eq("I am a Cat, and I go 'meow'")
   end
 end
