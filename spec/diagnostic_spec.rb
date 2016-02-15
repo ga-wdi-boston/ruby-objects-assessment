@@ -119,6 +119,6 @@ RSpec.describe 'Answer' do
 
   it 'has housecat_noise' do
     expect(Answer.housecat_noise).to be_a(String)
-    expect(Answer.housecat_noise).to eq("I am a Cat, and I go 'meow'")
+    expect(Answer.housecat_noise).to eq("I am a HouseCat, and I go 'meow'")
   end
 end
