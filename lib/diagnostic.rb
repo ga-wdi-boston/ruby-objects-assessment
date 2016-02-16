@@ -8,7 +8,18 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person # cap for class
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
 ##
 
 # Question 2
@@ -17,8 +28,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave()
+Answer.dave = dave
 #
 
 # Question 3
@@ -27,7 +39,13 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < person # I know include is better not include but the other one
+  #include person
+  def solve_problems
+    'think think think'
+  end
+end
+
 ##
 
 ##
@@ -62,8 +80,13 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+
+# This is the output because we create a new HouseCat then call class of say_hello.
+# so HouseCat inderates from Cat and Cat inherates Animal. Animal has the method of say_hello
+# say_hello puts the string of "I am a HouseCat, and I go 'meow'" by asesing the string interpoluation in this order...
+# #{self.class.name} = HouseCat because HouseCat is the new object that we created.
+# #{@sound} = meow becuase @sound in Animal gets assigned from HouseCat initialize.
 ##
 
 # Question 5
@@ -86,7 +109,14 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+
+end
+
+class Cat < Carnivorous
+
+end
+
 ##
 
 # Question 6
