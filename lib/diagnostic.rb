@@ -8,7 +8,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -18,7 +28,9 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+david = Person.new("Dave", 32, "Ohio")
+david.location = "Boston"
+Answer.dave = david
 #
 
 # Question 3
@@ -27,7 +39,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    p "think think think"
+  end
+end
 ##
 
 ##
@@ -61,9 +77,10 @@ class HouseCat < Cat
 end
 
 ##
-# your answers here
-Answer.housecat_noise = nil
-#
+# I am a HouseCat, and I go 'meow'
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+# HouseCat is derived from a Cat which is derived from an Animal, but the only class
+# that has a sound is a HouseCat so it would be meow
 ##
 
 # Question 5
@@ -86,7 +103,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    prints "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -95,7 +118,8 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
+# Composition yields beter looking code which is more organized and easier to
+# read.
 #
 #
 ##
@@ -108,7 +132,7 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
@@ -116,19 +140,23 @@ class ComboAttack
   end
 
   def punch
-    @moves << 'punch'
-    @damage += 5
-    @damage *= multiplier
+    self.moves << 'punch'
+    self.damage += 5
+    self.damage *= multiplier
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    self.moves << "move #{direction}"
   end
 
   def kick
-    @moves << 'kick'
-    @damage += 10
-    @damage *= multiplier
+    self.moves << 'kick'
+    self.damage += 10
+    self.damage *= multiplier
+  end
+
+  def get_possible_moves
+    p "kick, move, punch"
   end
 
   private
