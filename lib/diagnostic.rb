@@ -8,7 +8,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -17,8 +27,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
+Answer.dave = dave
 #
 
 # Question 3
@@ -27,7 +38,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    '"think think think"'
+  end
+end
 ##
 
 ##
@@ -62,7 +77,7 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
 #
 ##
 
@@ -86,7 +101,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -95,9 +116,11 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
-#
+# The main advantage of modules is that you can include as many modules as you
+# want in a class, whereas a class can only inherit traits from its chain of
+# ancestors. Also, when using inheritance, a change in a superclass will have
+# substantial implications for it's subclasses, and may require a lot of extra
+# work to mitigate the effects of a change.
 ##
 
 # Question 7
@@ -108,27 +131,32 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_reader :moves
+  attr_accessor :damage
 
   def initialize
     @moves = []
     @damage = 0
   end
 
+  def self.get_possible_moves
+    "kick, move, punch"
+  end
+
   def punch
-    @moves << 'punch'
-    @damage += 5
-    @damage *= multiplier
+    self.moves << 'punch'
+    self.damage += 5
+    self.damage *= multiplier
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    self.moves << "move #{direction}"
   end
 
   def kick
-    @moves << 'kick'
-    @damage += 10
-    @damage *= multiplier
+    self.moves << 'kick'
+    self.damage += 10
+    self.damage *= multiplier
   end
 
   private
