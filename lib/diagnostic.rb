@@ -8,7 +8,18 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
+end
 ##
 
 # Question 2
@@ -17,8 +28,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
+Answer.dave = dave
 #
 
 # Question 3
@@ -27,7 +39,13 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+
+  def solve_problems
+    puts "think think think"
+  end
+
+end
 ##
 
 ##
@@ -62,8 +80,13 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a Animal, and I go 'meow'"
+# Housecat.new creates a new instance of housecat, which inherits from cat. Cat
+# inherits from Animal. Calling the "say_hello" method would look first to the
+# housecat class and then to the cat class, unsuccessfully trying to find that
+# method. Finally it would look to the Animal class, where the "say_hello" is
+# written, and return the associated string. Because @sound is an instance
+# variable of the Housecat class, it is not overwritten by nil.
 ##
 
 # Question 5
@@ -86,7 +109,14 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+
+end
 ##
 
 # Question 6
@@ -96,8 +126,11 @@ end
 
 ##
 # your answer, in comments, here
-#
-#
+# mixins are easier to read and more flexible than inherited classes. They're
+# easier to read because the code is semantically basically the same as it would
+# be in english, and they're more flexible because 'include' is just a method
+# call, so they can be 'managed at runtime'
+# source: http://ducktypo.blogspot.com/2010/08/why-inheritance-sucks.html
 ##
 
 # Question 7
@@ -119,16 +152,27 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def damage
+    @damage
+  end
+
+  def get_possible_moves
+    puts "kick, move, punch"
   end
 
   private
