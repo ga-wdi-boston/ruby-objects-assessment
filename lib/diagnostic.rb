@@ -8,7 +8,22 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize (name, age, location)
+
+    @name = name
+    @age = age
+    @location = location
+
+  end
+
+
+end
 ##
 
 # Question 2
@@ -18,7 +33,10 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+Answer.dave = dave
+
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
 #
 
 # Question 3
@@ -27,7 +45,13 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+
+  def solve_problems
+    p "think think think"
+  end
+
+end
 ##
 
 ##
@@ -62,8 +86,10 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = " I am a HouseCat, and I go 'meow' "
+# this is the output because HouseCat inherits from Cat, which inherits from Animal
+# HouseCat checks for the method on itself, then checks for it on Cat, which is getting
+# the method from animal.
 ##
 
 # Question 5
@@ -86,7 +112,14 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    p "ROAR"
+  end
+
+end
 ##
 
 # Question 6
@@ -96,7 +129,8 @@ end
 
 ##
 # your answer, in comments, here
-#
+# Mixins allow you to be flexible.  Mixins or modules are essentially buckets
+# of methods that can be shared between classes.
 #
 ##
 
@@ -119,16 +153,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    p "kick, move, punch"
   end
 
   private
