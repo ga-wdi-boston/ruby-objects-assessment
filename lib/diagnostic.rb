@@ -8,7 +8,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+
+  def initialize(age, name, location)
+    @age = age
+    @name = name
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -18,7 +28,9 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
+Answer.dave = dave
 #
 
 # Question 3
@@ -27,7 +39,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    returns "think think think"
+  end
+end
 ##
 
 ##
@@ -62,7 +78,8 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+#It would answer to that because HouseCat.new.say_hello looks first to HouseCat class for say_hello method, which it doesn't  have. It then looks to the parent Animal class for that method that outputs "I am a #{self.class.name}, and I go '#{@sound}'". The HouseCat class has its own sound method so the string interpolation is replaced by "meow".
 #
 ##
 
@@ -86,7 +103,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion
+  include Carnivorous
+  def roar
+    print "ROAR"
+  end
+end
 ##
 
 # Question 6
@@ -95,7 +117,7 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
+# Mixin modules allows class methods to add functionality from multiple places and share functionality between classes without using inheritance.
 #
 #
 ##
@@ -115,20 +137,24 @@ class ComboAttack
     @damage = 0
   end
 
-  def punch
+  def self.punch
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
   end
 
-  def move(direction)
+  def self.move(direction)
     @moves << "move #{direction}"
   end
 
-  def kick
+  def self.kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
+    return "kick, move, punch"
   end
 
   private
@@ -143,3 +169,7 @@ class ComboAttack
     end
   end
 end
+
+
+#http://culttt.com/2015/07/08/working-with-mixins-in-ruby/
+#http://rubylearning.com/satishtalim/modules_mixins.html
