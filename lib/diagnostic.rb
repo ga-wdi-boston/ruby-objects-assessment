@@ -8,7 +8,18 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+    attr_accessor :name
+    attr_reader :age
+    attr_writer :location
+
+    def initialize(name, age, location)
+        @name = name
+        @age = age
+        @location = location
+    end
+end
+
 ##
 
 # Question 2
@@ -18,7 +29,8 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+Answer.dave =  Person.new("Dave", 32, "Ohio")
+Answer.dave.location = "Somerville"
 #
 
 # Question 3
@@ -27,7 +39,12 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+    def solve_problems
+        puts 'think think think'
+    end
+end
+
 ##
 
 ##
@@ -63,7 +80,10 @@ end
 ##
 # your answers here
 Answer.housecat_noise = nil
-#
+I am a HouseCat, and I go 'meow'
+
+HouseCat inherits from Cat class, which inherits from the Animal Class. The Animal Class has a
+say_hello method.
 ##
 
 # Question 5
@@ -86,7 +106,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+    include Carnivorous
+    def roar
+        print 'Roar!'
+    end
+end
 ##
 
 # Question 6
@@ -95,8 +120,10 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+
+Advantages of using composition over direct inheritance : Modules are more managable. Inheritance
+lead to diamond shape inheritance. Modules are more flexible. Because include is a regular method
+call, Modules can be managed at runtime.
 #
 ##
 
@@ -108,7 +135,8 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_reader :moves :damage
+  attr_accessor :move
 
   def initialize
     @moves = []
@@ -141,5 +169,9 @@ class ComboAttack
     else
       1
     end
+  end
+
+  def get_possible_moves
+    'kick, move, punch'
   end
 end
