@@ -7,9 +7,17 @@ Answer = OpenStruct.new
 # Name should be readable and writeable, age should only be readable,
 # and location should only be writable.
 
-##
-# your code here
-##
+class Person
+  attr_reader :age
+  attr_writer :location
+  attr_accessor :name
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 
 # Question 2
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -17,8 +25,11 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+
+dave.location = 'Somerville'
+
+Answer.dave = dave
 #
 
 # Question 3
@@ -26,9 +37,11 @@ Answer.dave = nil
 # Give it a new instance method called 'solve_problems',
 # which returns the string "think think think".
 
-##
-# your code here
-##
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 
 ##
 # Question 4
@@ -40,30 +53,34 @@ Answer.dave = nil
 
 class Animal
   def initialize
-      @sound = nil
+    @sound = nil
   end
 
   def say_hello
-      puts "I am a #{self.class.name}, and I go '#{@sound}'"
+    puts "I am a #{self.class.name}, and I go '#{@sound}'"
   end
 end
 
 class Cat < Animal
   def groom
-    puts "lick... lick..."
+    puts 'lick... lick...'
   end
 end
 
 class HouseCat < Cat
   def initialize
-    @sound = "meow"
+    @sound = 'meow'
   end
 end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a Housecat, and I go 'meow'"
+# HouseCat.new initializes a new Housecat object with the @sound of 'meow'.
+# When we call say_hello, first the Cat class is checked for a say_hello method; it doesn't have one,
+# Animal is checked. Animal has the method, so it is called, with self referring to the object type
+# that called the method, "HouseCat", and @sound referring to the calling objects @sound property.
+
 ##
 
 # Question 5
@@ -77,16 +94,24 @@ module Carnivorous
   end
 
   def eat_meat(food)
-    if food.class == "Animal"
+    if food.class == 'Animal'
       puts "NOM NOM NOM. #{food.class} is delicious"
     else
-      puts "Yuck!"
+      puts 'Yuck!'
     end
   end
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR"
+  end
+
+end
+
 ##
 
 # Question 6
@@ -95,8 +120,7 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# One can include as many mixins as one likes in a class, while a class may only inherit directly from one superclass
 #
 ##
 
@@ -132,11 +156,12 @@ class ComboAttack
   end
 
   private
+
   def multiplier
-    case (moves)
+    case moves
     when ['punch', 'move left', 'kick']
       1.5
-    when ['kick', 'punch', 'up']
+    when %w(kick punch up)
       2
     else
       1
