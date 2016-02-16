@@ -8,7 +8,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -17,8 +27,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+@location = 'Somerville'
+Answer.dave = dave
 #
 
 # Question 3
@@ -27,7 +38,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -62,8 +77,11 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+# The method lookup chain checks if the say_hello method is in HouseCat, doesn't
+# find it, moves on to the class Cat (which HouseCat inherits from) and checks
+# there, still doesn't find it, and moves up the inheritance chain to Animal
+# where the say_hello method is indeed defined.
 ##
 
 # Question 5
@@ -86,7 +104,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # Question 6
@@ -96,7 +120,7 @@ end
 
 ##
 # your answer, in comments, here
-#
+# Mixins are easier to read, DRY, semantic, and flexible
 #
 ##
 
@@ -108,7 +132,7 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
@@ -135,11 +159,12 @@ class ComboAttack
   def multiplier
     case (moves)
     when ['punch', 'move left', 'kick']
-      1.5
+      @damage = 1.5
     when ['kick', 'punch', 'up']
-      2
+      @damage = 2
     else
-      1
+      @damage = 1
     end
   end
+
 end
