@@ -8,7 +8,18 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
 ##
 
 # Question 2
@@ -17,8 +28,10 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+new_person = Person.new("Dave", 32, "Ohio")
+new_person.location = "Somerville"
+
+Answer.dave = new_person
 #
 
 # Question 3
@@ -27,7 +40,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -62,8 +79,8 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+#The name of the instance's class is Housecat, since that was what was called with .new. You can use say_hello on it because it inherits from Cat, and Cat inherits from Animal
 ##
 
 # Question 5
@@ -86,7 +103,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -95,7 +118,7 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
+# inheritance can be messy to maintain if it is more than 1 level deep, whereas a relationship to a mixin is more clear. Your code is more readable and easier to change without breaking things.
 #
 #
 ##
@@ -115,8 +138,8 @@ class ComboAttack
     @damage = 0
   end
 
-  def punch
-    @moves << 'punch'
+  def punch (move)
+    @moves = move
     @damage += 5
     @damage *= multiplier
   end
@@ -129,6 +152,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def self.get_possible_moves
+    "kick, move, punch"
   end
 
   private
