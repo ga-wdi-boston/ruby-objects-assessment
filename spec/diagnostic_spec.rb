@@ -1,4 +1,4 @@
-require_relative '../lib/assessment.rb'
+require_relative '../lib/diagnostic.rb'
 
 RSpec.describe 'Person' do
   let(:name) { "Jeff" }
