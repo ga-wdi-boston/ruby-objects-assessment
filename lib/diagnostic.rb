@@ -8,7 +8,11 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+end
 ##
 
 # Question 2
@@ -17,8 +21,12 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+def initialize("Dave", 32, "Ohio")
+  @name = name
+  @age = age
+  @location = "Somerville"
+end
+Answer.dave = @location
 #
 
 # Question 3
@@ -27,7 +35,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+  "think think think"
+  end
+end
 ##
 
 ##
@@ -62,8 +74,15 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go meow"
+
+# This would be the output because the class HouseCat is inheritted from the
+# class Cat,which is inheritted from the class Animal, which has access to the
+# animal methods. The instance variable sound for HouseCat is equal to a string
+# that says meow. HouseCat inherits the say_hello method from the Animal class
+# and is able to evaluate that method using it's own declared instance variable
+# for sound.
+
 ##
 
 # Question 5
@@ -86,7 +105,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -95,8 +119,8 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# Using mixins makes the code you write more semantic and easier to read
+# for future developers and future you.
 #
 ##
 
