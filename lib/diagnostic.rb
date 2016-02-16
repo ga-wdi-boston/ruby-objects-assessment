@@ -83,10 +83,10 @@ end
 Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 # This is the output because we create a new HouseCat then call class of say_hello.
-# so HouseCat inderates from Cat and Cat inherates Animal. Animal has the method of say_hello
-# say_hello puts the string of "I am a HouseCat, and I go 'meow'" by asesing the string interpoluation in this order...
+# so HouseCat inherits from Cat and Cat inherits Animal. Animal has the method of say_hello
+# say_hello puts the string of "I am a HouseCat, and I go 'meow'" by assessing the string interpolation in this order...
 # #{self.class.name} = HouseCat because HouseCat is the new object that we created.
-# #{@sound} = meow becuase @sound in Animal gets assigned from HouseCat initialize.
+# #{@sound} = meow because @sound in Animal gets assigned from HouseCat initialize.
 ##
 
 # Question 5
