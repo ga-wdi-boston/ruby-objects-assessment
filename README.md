@@ -13,7 +13,7 @@ Edit `lib/diagnostic.rb` and complete each question.
 You may use any resource, other than someone else in the room,
 to help you complete the diagnostic.
 
-Check your answers as you work with by running `rspec specs`.
+Check your answers as you work with by running `rspec spec`.
 
 Commit and push your changes.
 
