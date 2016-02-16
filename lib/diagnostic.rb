@@ -8,7 +8,18 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -17,8 +28,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location=("Somerville")
+Answer.dave = dave
 #
 
 # Question 3
@@ -27,7 +39,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -62,8 +78,11 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go meow"
+# Ruby tends to pull from the last subclass and since HouseCat is a subclass
+# of both Cat and Animal it inherits say_hello and has the @sound "meow" when
+# initialized. self.class.name refers to HouseCat since HouseCat class is being
+# created.
 ##
 
 # Question 5
@@ -86,7 +105,14 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    p "ROAR!"
+  end
+
+end
 ##
 
 # Question 6
@@ -96,8 +122,10 @@ end
 
 ##
 # your answer, in comments, here
-#
-#
+# Using modules over direct inheritance allows your code to be more flexible
+# and easier to read. You can easily define certain methods and variables
+# and transition them over to multiple classes without having to worry
+# about other things getting mixed in.
 ##
 
 # Question 7
@@ -107,8 +135,15 @@ end
 # Then, create a new class method called "get_possible_moves",
 # which returns the string "kick, move, punch"
 
+## Question 7 is not complete I was in the middle of analyzing it,
+# I did create a class method, but haven't fixed the ComboAttack class.
+
 class ComboAttack
   attr_reader :moves, :damage
+
+  def self.get_possible_moves
+    "kick, move, punch"
+  end
 
   def initialize
     @moves = []
