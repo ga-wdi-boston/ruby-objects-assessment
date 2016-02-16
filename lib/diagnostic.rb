@@ -9,6 +9,19 @@ Answer = OpenStruct.new
 
 ##
 # your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
+
 ##
 
 # Question 2
@@ -18,7 +31,12 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
+
+Answer.dave = dave
+
 #
 
 # Question 3
@@ -29,6 +47,13 @@ Answer.dave = nil
 ##
 # your code here
 ##
+
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+end
+
 
 ##
 # Question 4
@@ -62,8 +87,11 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+# While say_hello invoke the method in Animal, but HouseCat.new invoked creating
+# new object under the sub class HouseCat, which self.class.name will refer to
+# the class in which it was invoked, which is HouseCat.  @sound is unquie to
+# the subclass Housecat, so it turn "meow".
 ##
 
 # Question 5
@@ -89,6 +117,14 @@ end
 # your code here
 ##
 
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
+
 # Question 6
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
@@ -96,8 +132,9 @@ end
 
 ##
 # your answer, in comments, here
-#
-#
+# Direct inheritance can only have 1 direct parent class (more if you think
+# grandparents), but you can include as many mixins into a class.
+# This is you more flexible to define specific features in a subclass
 ##
 
 # Question 7
@@ -129,6 +166,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
+    puts "kick, move, punch"
   end
 
   private
