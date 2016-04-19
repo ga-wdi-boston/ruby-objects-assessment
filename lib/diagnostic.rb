@@ -13,7 +13,18 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+# person = Person.new(name, age, location)
+
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  # def initialize(name, age, location)
+  #   @name = name,
+  #   @age =  age,
+  #   @location = location
+  # end
+end
 ##
 
 # Question 2
@@ -23,7 +34,16 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+newPerson = Person.new("Dave", 32, "Ohio")
+
+def newLocation (location)
+  @location = location
+end
+
+Answer.dave = Person.new()
+
+
+
 #
 
 # Question 3
@@ -32,7 +52,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+end
 ##
 
 ##
@@ -67,8 +91,9 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = 'I am a HouseCat, and I go 'meow''
+self refers to the housecat class, and sound is what it is initialized with. Also I ran it in pry and that is what it came out with
+
 ##
 
 # Question 5
@@ -91,7 +116,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -100,9 +131,8 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
-#
+# by linking different objects together in a hierarchy, an object  can inherits behavior from
+# another object, and can 'share' code (data or behavior) between the two classes.
 ##
 
 # Question 7
@@ -134,6 +164,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
+    puts "kick, move, punch"
   end
 
   private
