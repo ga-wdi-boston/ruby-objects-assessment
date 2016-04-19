@@ -13,17 +13,29 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
-# Then, in the next line, change this Person's location property to "Somerville".
+# Then, in the next line, change this Person's location
+# property to "Somerville".
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
 # your answers here
-Answer.dave = nil
+Answer.dave = Person.new('Dave', 32, 'Ohio')
+Answer.dave.location = 'Somerville'
 #
 
 # Question 3
@@ -32,12 +44,17 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
 # Question 4
-# Given the code below, what be the output from calling `HouseCat.new.say_hello`?
+# Given the code below, what be the output from calling
+# `HouseCat.new.say_hello`?
 # Store your answer in `Answer.houseCatNoise`.
 #
 # Then, in a comment on the next line, explain why this would be the output,
@@ -55,7 +72,7 @@ end
 
 class Cat < Animal
   def groom
-    puts "lick... lick..."
+    puts 'lick... lick...'
   end
 end
 
@@ -67,7 +84,7 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
 #
 ##
 
@@ -91,7 +108,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR'
+  end
+end
 ##
 
 # Question 6
@@ -100,9 +123,9 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
-#
+# You can only directly inherit from one class--and by doing so you also inherit
+# from all of its parent classes. Sometimes this is desireable, but if all you
+# want to do is incorporate some functionality, mixins allow more flexibility.
 ##
 
 # Question 7
@@ -112,6 +135,7 @@ end
 # Then, create a new class method called "get_possible_moves",
 # which returns the string "kick, move, punch"
 
+# Combo Attack
 class ComboAttack
   attr_reader :moves, :damage
 
@@ -120,20 +144,27 @@ class ComboAttack
     @damage = 0
   end
 
+  def self.get_possible_moves
+    'kick, move, punch'
+  end
+
   def punch
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
