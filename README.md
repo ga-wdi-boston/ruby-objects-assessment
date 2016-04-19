@@ -2,38 +2,46 @@
 
 # Diagnostic: Ruby Objects
 
-You have 30 minutes.
-
 ## Instructions
 
-Fork and clone this repository.
-Move into the cloned directory and run `bundle install`.
+1.  Fork and clone this repository.
+1.  Change into the new directory.
+1.  Install dependencies.
+1.  Create and checkout a new branch, named `response`.
+1.  Follow the directions given in [diagnostic.md](diagnostic.md).
+1.  Before the alotted time is up, push to your fork and issue a pull request.
 
-Edit `lib/diagnostic.rb` and complete each question.
-You may use any resource, other than someone else in the room,
-to help you complete the diagnostic.
+Your pull request description should contain a "fist to five" for comfort and
+clarity. Additionally, you should mention the resources you used to help you
+complete this assessment. For example:
 
-Check your answers as you work with by running `rspec spec`.
-
-Commit and push your changes.
-
-When you submit your pull request, please include a "fist to five"
-for comfort and clarity in the pull request description.
-
-Additionally,
-you should mention the resources you used to help you complete this diagnostic.
-For example:
-
-```
+```md
 Comfort: 3
 Clarity: 3
 
-I used Google to research instance variables. [This article](https://rubymonk.com/learning/books/4-ruby-primer-ascent/chapters/45-more-classes/lessons/110-instance-variables) really helped a lot.
+I used Google and my class notes to help with this assessment.
 ```
 
----
+You may wish to refer to ["How do I submit diagnostics?"](https://github.com/ga-wdi-boston/meta/wiki/Diagnostics)
+and other [FAQs](https://github.com/ga-wdi-boston/meta/wiki/) related to
+[forking, cloning](https://github.com/ga-wdi-boston/meta/wiki/ForkAndClone),
+and [pull requests](https://github.com/ga-wdi-boston/meta/wiki/PullRequest).
 
-[License](LICENSE)
-------------------
+You may use **any resource** other than each other to complete this diagnostic.
+This includes referencing talk materials, appropriate documentation, and
+searching for help online.
 
-Source code distributed under the MIT license. Text and other assets copyright General Assembly, Inc., all rights reserved.
+You should be running `grunt nag` before diagnosing any bugs, since it finds
+some of the most common sources of errors. After `grunt nag` passes, you should
+run `grunt test` to run the included tests. Tests will tell you whether of not
+your responses are correct.
+
+It's probably a good idea to include the above verbatim in each diagnostic.
+Remember to edit the link to the actual diagnostic file (it might be stored in a
+different directory or have a different extension). If tooling is not included
+in this diagnostic, feel free to remove that bit from these instructions.
+
+## [License](LICENSE)
+
+Source code distributed under the MIT license. Text and other assets copyright
+General Assembly, Inc., all rights reserved.
