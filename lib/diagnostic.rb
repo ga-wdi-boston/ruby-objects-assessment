@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -22,8 +32,8 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Somerville")
+Answer.dave = "Dave", 32, "Somerville"
 #
 
 # Question 3
@@ -32,7 +42,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -67,8 +81,10 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go meow"
+# we are calling 'sayhello' on HouseCat class which inherits
+# from Cat class which inherits from Animal class which has the 'sayhello' method.
+# The class name and sound in the method is pointing to the HouseCat class.
 ##
 
 # Question 5
@@ -91,7 +107,14 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    @sound = 'ROAR!'
+    puts "#{@sound}"
+  end
+end
 ##
 
 # Question 6
