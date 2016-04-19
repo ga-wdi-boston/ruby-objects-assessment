@@ -13,7 +13,16 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+Answer.question_1 = class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -23,7 +32,9 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+Answer.question_2 = Answer.dave = Person.new("Dave", 32, "Ohio")
+dave[:location] = "Somerville"
+Answer.dave = save
 #
 
 # Question 3
@@ -32,7 +43,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+Answer.question_3 = class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -67,8 +82,8 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "meow"
+#say_hello would go up the chain until it finds that method in the animal class
 ##
 
 # Question 5
@@ -91,7 +106,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -100,8 +120,9 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# Using mixins keeps the code more modular by keeping it in a remote location as opposed
+# to making other code that uses that mixin being dependant on a particular class or object.
+# It also allows you to maintain modularity so the code will only have to be changed in one place
 #
 ##
 
@@ -114,7 +135,7 @@ end
 
 class ComboAttack
   attr_reader :moves, :damage
-
+  include multiplier
   def initialize
     @moves = []
     @damage = 0
