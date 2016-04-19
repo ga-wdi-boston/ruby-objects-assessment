@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+attr_accessor :name
+attr_reader :age
+attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -23,8 +33,11 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
-#
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
+
+Answer.dave = dave
+#?????
 
 # Question 3
 # Create another class called Developer that inherits from Person.
@@ -32,7 +45,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    return "think think think"
+  end
+end
 ##
 
 ##
@@ -67,8 +84,9 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a Cat, and I go meow"
+#Due to direct inheritance, HouseCat works its way "up" to it's grandparent
+# Animal to call the correct method with the inputs from HouseCat
 ##
 
 # Question 5
@@ -91,7 +109,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR'
+  end
+end
 ##
 
 # Question 6
@@ -100,8 +124,9 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# composition allows you to build smaller modules that only include
+# the methods you want. Increases method specificity and decreases clutter.
+# Plus, you can share a module across non-related classes
 #
 ##
 
@@ -113,7 +138,7 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
