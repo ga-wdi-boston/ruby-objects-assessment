@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -23,7 +33,10 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+Answer.dave = ("Dave", 32, "Ohio")
+Answer.dave.location = "Somerville"
+
+
 #
 
 # Question 3
@@ -32,7 +45,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+end
 ##
 
 ##
@@ -67,8 +84,8 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a #{self.class.name}, and I go '#{@sound}'"
+# Because HouseCat inherits from Cat which inherits from Animal which has say_hello and responds with the above answer.
 ##
 
 # Question 5
@@ -91,7 +108,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
