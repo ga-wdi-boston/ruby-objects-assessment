@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -22,8 +32,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
+Answer.dave = dave
 #
 
 # Question 3
@@ -32,7 +43,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -67,8 +82,13 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a Housecat, and I go 'meow'"
+# Housecat.new creates a new instance of Housecat.  The instance method searches
+# for a class to find the say_Hello function in.  First it looks in Housecat,
+# then in Cat, and then in Animal where it finds the requisite function.  The
+# say_hello function is run with Housecat as the first object due to the use of
+# 'self' referring to the HouseCat class and sound referring to the class
+# method.
 ##
 
 # Question 5
@@ -91,7 +111,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -100,7 +125,8 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
+# Mixins allow you to provide optional features for a class and use a feature
+# in multiple classes.
 #
 #
 ##
@@ -134,6 +160,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
+    "kick, move, punch"
   end
 
   private
