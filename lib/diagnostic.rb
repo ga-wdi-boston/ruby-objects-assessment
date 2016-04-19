@@ -13,7 +13,7 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-Answer.question_1 = class Person
+Answer= class Person
   attr_accessor :name
   attr_reader :age
   attr_writer :location
@@ -32,7 +32,7 @@ end
 
 ##
 # your answers here
-Answer.question_2 = Answer.dave = Person.new("Dave", 32, "Ohio")
+Answer= Answer.dave = Person.new("Dave", 32, "Ohio")
 dave[:location] = "Somerville"
 Answer.dave = save
 #
@@ -43,7 +43,7 @@ Answer.dave = save
 # which returns the string "think think think".
 
 ##
-Answer.question_3 = class Developer < Person
+Answer = class Developer < Person
   def solve_problems
     "think think think"
   end
@@ -155,6 +155,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
+    "kick, move, punch"
   end
 
   private
