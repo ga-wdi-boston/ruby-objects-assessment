@@ -13,7 +13,16 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -22,8 +31,12 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+newbie = Person.new("Dave", 32, "Ohio")
+puts newbie
+
+newbie.location = "Somerville"
+
+Answer.dave = newbie
 #
 
 # Question 3
@@ -32,8 +45,12 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
-##
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
+
 
 ##
 # Question 4
@@ -67,8 +84,9 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a Housecat and I go 'meow'"
+#It looks up the chain until it finds def say_hello in class Animal and then
+#uses the sound for HouseCat.
 ##
 
 # Question 5
@@ -91,7 +109,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+ class Lion < Cat
+   include Carnivorous
+   def roar
+     puts "ROAR!"
+   end
+ end
 ##
 
 # Question 6
@@ -100,8 +123,7 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+#It's easier to include a module than have to look up the chain of inheritance.
 #
 ##
 
