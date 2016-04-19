@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -22,8 +32,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
+Answer.dave = dave
 #
 
 # Question 3
@@ -32,7 +43,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -67,8 +82,9 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+#self.class.name refers to name of the class the instance is called in, which is
+#HouseCat, and the sound also come from there.
 ##
 
 # Question 5
@@ -91,7 +107,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+def
 ##
 
 # Question 6
@@ -101,8 +123,8 @@ end
 
 ##
 # your answer, in comments, here
-#
-#
+# With mixins, the inheritance can be dynamic, to refer to any classes as the code
+#change during runtime, rather than pointing to one static class to inherit from.
 ##
 
 # Question 7
@@ -113,7 +135,7 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
@@ -128,6 +150,8 @@ class ComboAttack
 
   def move(direction)
     @moves << "move #{direction}"
+    @damage += 2
+    @damage *= multiplier
   end
 
   def kick
@@ -146,5 +170,8 @@ class ComboAttack
     else
       1
     end
+  end
+  def get_possible_moves
+    "kick, move, punch"
   end
 end
