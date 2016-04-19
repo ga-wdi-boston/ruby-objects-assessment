@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -23,7 +33,9 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+new_person = Person.new('Dave', 32, 'Ohio')
+new_person.location = 'Somerville'
+Answer.dave = new_person
 #
 
 # Question 3
@@ -32,7 +44,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -67,8 +83,8 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+# This is the output because HouseCat.new.say_hello looks for say_hello in HouseCat, doesn't find it, then looks in Cat, doesn't find it, then looks in Animal and finds the right method, inserting the correct classname and sound into the output.
 ##
 
 # Question 5
@@ -91,7 +107,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    print 'ROAR!'
+  end
+end
 ##
 
 # Question 6
@@ -101,7 +123,8 @@ end
 
 ##
 # your answer, in comments, here
-#
+# You can include multiple mixins, but only inherit from one class.
+# Also, characteristics or properties of entities or things are best encapsulated in modules, which makes your code cleaner.
 #
 ##
 
@@ -124,16 +147,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    "kick, move, punch"
   end
 
   private
