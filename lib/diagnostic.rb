@@ -1,6 +1,11 @@
 require 'ostruct'
 Answer = OpenStruct.new
 
+# STORE YOUR ANSWER.BLAH = Answer_here
+# BE SURE TO FOLLOW THE ABOVE INSTRUCTION
+# BE SURE TO FOLLOW THE ABOVE INSTRUCTION
+# BE SURE TO FOLLOW THE ABOVE INSTRUCTION
+
 # Question 1
 # Create a Person class, with attributes name, age, and location.
 # All three attributes should be defined when you instantiate a new Person.
