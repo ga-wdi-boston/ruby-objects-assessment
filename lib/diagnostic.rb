@@ -13,7 +13,16 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+  def initialize
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -22,8 +31,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+Dave = Person.new("Dave", 32, "Ohio")
+Dave.@location = "Somerville" # I know this is wrong, but I don't know what's right anymore.
+Answer.dave =
 #
 
 # Question 3
@@ -37,9 +47,13 @@ Answer.dave = nil
 
 ##
 # Question 4
-# Given the code below, what be the output from calling `HouseCat.new.say_hello`?
+# Given the code below, what be the output from calling `HouseCat.new.say_hello`? #what be? pirate much?
 # Store your answer in `Answer.houseCatNoise`.
-#
+Housecat.new.say_hello would output "meow"
+# It started as I am a cat, and I go @sound and then sound is intitialized to be meow
+# HouseCat inherits from Cat, which inherits from ANimal. Oh wait! So would that make the sound nil then?
+# I'm not sure what overrides what But I think it would be meow?
+
 # Then, in a comment on the next line, explain why this would be the output,
 # based on the method lookup chain.
 
@@ -88,6 +102,14 @@ module Carnivorous
       puts "Yuck!"
     end
   end
+
+  class Lion < Cat
+    @can_eat_meat
+    true
+    def make_sound
+      puts "roar"
+  end
+
 end
 
 ##
@@ -101,7 +123,8 @@ end
 
 ##
 # your answer, in comments, here
-#
+# I'm not even sure what the difference is. I think it allows more flexibiility
+# understand either enough to have a good answer.
 #
 ##
 
