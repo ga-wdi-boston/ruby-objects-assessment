@@ -13,7 +13,16 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+ attr_accessor :name
+ attr_reader :aga
+ attr_writer :location
+ def initialize(name, age, location)
+   @name = name
+   @age = age
+   @location = location
+ end
+end
 ##
 
 # Question 2
@@ -22,8 +31,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
+Answer.dave = dave
 #
 
 # Question 3
@@ -32,7 +42,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+ def solve_problems
+   "think think think"
+ end
+end
 ##
 
 ##
@@ -67,8 +81,11 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go meow"
+First it goes to make a new instance from HouseCat class and it first look for say_hello method
+from HouseCat class, but it can't find it, so it then look up for its inherited parent class Cat,
+,but it won't find it from Cat, so it will look up for Cat parent Animal class and use say_hello method from
+Animal class.
 ##
 
 # Question 5
@@ -91,7 +108,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -101,7 +123,9 @@ end
 
 ##
 # your answer, in comments, here
-#
+#Because inheritance is only single direction and can be only inherited from one object,
+# but mixins can be used many of them in one class. So class can have a lot of methods
+# can be use from different mixins;
 #
 ##
 
@@ -124,18 +148,25 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
+  def self.get_possible_moves
+    "kick, move, punch"
+  end
+  
   private
   def multiplier
     case (moves)
