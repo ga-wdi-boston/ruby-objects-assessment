@@ -1,9 +1,9 @@
 require_relative '../lib/diagnostic.rb'
 
 RSpec.describe 'Person' do
-  let(:name) { "Jeff" }
+  let(:name) { 'Jeff' }
   let(:age) { 29 }
-  let(:location) { "Boston" }
+  let(:location) { 'Boston' }
 
   subject(:jeff) { Person.new(name, age, location) }
 
@@ -23,8 +23,8 @@ RSpec.describe 'Person' do
   end
 
   it 'has setters for name and location' do
-    expect { subject.name = "Matt" }.not_to raise_error
-    expect { subject.location = "Cambridge" }.not_to raise_error
+    expect { subject.name = 'Matt' }.not_to raise_error
+    expect { subject.location = 'Cambridge' }.not_to raise_error
   end
 
   it 'has no setter for age' do
@@ -37,9 +37,9 @@ RSpec.describe 'Person' do
 end
 
 RSpec.describe 'Developer' do
-  let(:name) { "Jeff" }
+  let(:name) { 'Jeff' }
   let(:age) { 29 }
-  let(:location) { "Boston" }
+  let(:location) { 'Boston' }
 
   subject(:jeff) { Developer.new(name, age, location) }
 
@@ -100,25 +100,25 @@ RSpec.describe 'ComboAttack' do
 
   describe '::get_possible_moves' do
     it 'returns the string "kick, move, punch"' do
-      expect(ComboAttack.get_possible_moves).to eq("kick, move, punch")
+      expect(ComboAttack.get_possible_moves).to eq('kick, move, punch')
     end
   end
 end
 
-RSpec.describe 'Answer' do
+RSpec.describe 'Response' do
   it 'has a dog' do
-    expect(Answer.dog).to be_a(Dog)
+    expect(Response.dog).to be_a(Dog)
   end
 
   it 'has dave' do
-    expect(Answer.dave).to be_a(Person)
-    expect(Answer.dave.instance_variable_get(:@name)).to eq("Dave")
-    expect(Answer.dave.instance_variable_get(:@age)).to eq(32)
-    expect(Answer.dave.instance_variable_get(:@location)).to eq("Somerville")
+    expect(Response.dave).to be_a(Person)
+    expect(Response.dave.instance_variable_get(:@name)).to eq('Dave')
+    expect(Response.dave.instance_variable_get(:@age)).to eq(32)
+    expect(Response.dave.instance_variable_get(:@location)).to eq('Somerville')
   end
 
   it 'has housecat_noise' do
-    expect(Answer.housecat_noise).to be_a(String)
-    expect(Answer.housecat_noise).to eq("I am a HouseCat, and I go 'meow'")
+    expect(Response.housecat_noise).to be_a(String)
+    expect(Response.housecat_noise).to eq("I am a HouseCat, and I go 'meow'")
   end
 end

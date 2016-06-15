@@ -6,7 +6,7 @@
 
 1.  Fork and clone this repository.
 1.  Change into the new directory.
-1.  Install dependencies.
+1.  Install dependencies with `bundle install`.
 1.  Create and checkout a new branch, named `response`.
 1.  Follow the directions given in [lib/diagnostic.rb](lib/diagnostic.rb).
 1.  Before the alotted time is up, push to your fork and issue a pull request.
@@ -31,15 +31,10 @@ You may use **any resource** other than each other to complete this diagnostic.
 This includes referencing talk materials, appropriate documentation, and
 searching for help online.
 
-You should be running `grunt nag` before diagnosing any bugs, since it finds
-some of the most common sources of errors. After `grunt nag` passes, you should
-run `grunt test` to run the included tests. Tests will tell you whether of not
-your responses are correct.
-
-It's probably a good idea to include the above verbatim in each diagnostic.
-Remember to edit the link to the actual diagnostic file (it might be stored in a
-different directory or have a different extension). If tooling is not included
-in this diagnostic, feel free to remove that bit from these instructions.
+Pay attention to the linter before diagnosing any bugs, since it finds some of
+the most common sources of errors. After your code is lint-free, you should run
+`rspec test` to run the included tests. Tests will tell you whether of not your
+responses are correct.
 
 ## [License](LICENSE)
 
