@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -23,7 +33,9 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
+Answer.dave = dave
 #
 
 # Question 3
@@ -32,12 +44,17 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
 # Question 4
-# Given the code below, what be the output from calling `HouseCat.new.say_hello`?
+# Given the code below, what would be the output from calling
+# `HouseCat.new.say_hello`?
 # Store your answer in `Answer.houseCatNoise`.
 #
 # Then, in a comment on the next line, explain why this would be the output,
@@ -67,8 +84,9 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a Cat, and I go 'meow'"
+# self.class.name calls the name of the inherited class, whereas self.name would
+# call the name of the HouseCat class
 ##
 
 # Question 5
@@ -91,7 +109,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -101,8 +125,8 @@ end
 
 ##
 # your answer, in comments, here
-#
-#
+# A class can use any number of mixins, whereas with direct inheritance a class
+# can only inherit from one other class.
 ##
 
 # Question 7
@@ -113,11 +137,15 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
     @damage = 0
+  end
+
+  def get_possible_moves
+    puts "kick, move, punch"
   end
 
   def punch
