@@ -32,8 +32,9 @@ Response = OpenStruct.new
 # Then, in the next line, change this Person's location property to
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
-## replace nil with your response
-Response.dave = nil
+## replace nil with your response, then continue your work on the next line
+dave = nil
+Response.dave = dave
 ##
 
 ##
