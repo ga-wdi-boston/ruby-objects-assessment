@@ -13,11 +13,11 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-class Person(name, age, location)
+class Person
   attr_accessor :name
   attr_reader :age
   attr_writer :location
-  def initialize
+  def initialize(name, age, location)
     @name = name
     @age = age
     @location = location
@@ -122,8 +122,8 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# An advantage of using composition instead of inheritance is that a class can include
+# many modules, while it can only directly inherit from one.
 #
 ##
 
@@ -146,16 +146,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    'kick, move, punch'
   end
 
   private
