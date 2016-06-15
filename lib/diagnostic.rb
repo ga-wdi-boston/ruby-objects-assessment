@@ -179,6 +179,10 @@ class ComboAttack
     self
   end
 
+  def self.get_possible_moves
+    'kick, move, punch'
+  end
+
   private
 
   def multiplier
