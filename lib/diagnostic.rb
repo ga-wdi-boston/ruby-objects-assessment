@@ -13,7 +13,18 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -22,8 +33,10 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Sommerville"
+
+Answer.dave = dave
 #
 
 # Question 3
@@ -32,7 +45,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+Developer < Person
+  def solve_problems
+    return "think think think"
+  end
+
 ##
 
 ##
@@ -67,7 +84,7 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = "I am a HouseCat, and I go meow"
 #
 ##
 
@@ -91,7 +108,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    prints "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -101,7 +124,9 @@ end
 
 ##
 # your answer, in comments, here
-#
+in classes, we might want to add a common method to multiple classes while not inheriting
+instance variables or other instance methods from parent classes.  we dont want to inhert extra
+instance variables our subclass will not use
 #
 ##
 
