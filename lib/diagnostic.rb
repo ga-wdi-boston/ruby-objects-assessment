@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+attr_accessor :name
+attr_reader :age
+attr_writer :location
+
+def initialize(name,age,location)
+  @name = name,
+  @age = age,
+  @location = location
+end
+end
 ##
 
 # Question 2
@@ -22,7 +32,11 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
+#
+dave = Person.new('Dave', 32 ,'Ohio')
+
+dave[location] = 'Sommerville'
+
 Answer.dave = nil
 #
 
@@ -32,7 +46,13 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+
+  def solve_problems
+    retun "Think think think"
+  end
+
+end
 ##
 
 ##
@@ -67,7 +87,13 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = " I am a HouseCat, and I go 'meow'"
+
+# HouseCat.new.say_hello looks up first the say hello method, which it doesnt find in
+# HouseCat class but since it inherets from Cat it goes and looks there, fins nothin
+# but cat inherets from Animal so it goes further looks in ANimal and finds it.
+# Then it takes the class name from itself (housecat) and needs to look for a sound,
+# the first sound it find is "meov" voila!
 #
 ##
 
@@ -90,8 +116,16 @@ module Carnivorous
   end
 end
 
+
+
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    prints "ROAR!"
+  end
+end
 ##
 
 # Question 6
@@ -100,8 +134,10 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# A mixin can offer you way more features easily than writing your own class and inheret it from there.
+# You can mixin the Math module for example and get a bunch of stuff fro free, like PI constans etc.
+
+# inheretence is good too and can be modified a lot.
 #
 ##
 
@@ -148,3 +184,4 @@ class ComboAttack
     end
   end
 end
+ # erroro is: undefined method `move' for 5:Fixnum
