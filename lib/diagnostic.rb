@@ -13,17 +13,26 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
 ##
 
 # Question 2
-# Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
+# Instantiate a new Person object using arguments "Dave", 32, and "Ohio".
 # Then, in the next line, change this Person's location property to "Somerville".
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location= 'Somerville'
+Answer.dave = dave
 #
 
 # Question 3
@@ -32,7 +41,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -67,8 +80,12 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+#The lookup chain would start on HouseCat where there is no say_hello method,
+#so it would then look up the chain to the Cat class, which also does not have
+#the method, but it inherits from Animal which does have the method. Then self
+#would be the instance's class (HouseCat) & it would find the instance variable
+#@sound from HouseCat.
 ##
 
 # Question 5
@@ -91,7 +108,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # Question 6
@@ -101,8 +123,9 @@ end
 
 ##
 # your answer, in comments, here
-#
-#
+#You can only inherit from one class, whereas you can include multiple mixins.
+#Mixins allow us to reuse chunks of code multiple times, and they keep our code
+#D-R-Y.
 ##
 
 # Question 7
@@ -124,16 +147,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def get_possible_moves
+    puts 'kick move punch'
   end
 
   private
