@@ -13,7 +13,18 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
+end
 ##
 
 # Question 2
@@ -22,8 +33,12 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
+
+
+Answer.dave = dave
 #
 
 # Question 3
@@ -32,7 +47,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -67,7 +86,7 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
 #
 ##
 
@@ -90,6 +109,13 @@ module Carnivorous
   end
 end
 
+class Lion < Cat
+  include Carnivorous
+  def roar
+    p "ROAR!"
+  end
+end
+
 ##
 # your code here
 ##
@@ -100,8 +126,10 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# A new class can only inherit one class, but it can have unlimited mixins.
+# Modules are for sharing behavior while classes are for sharing relationships between objects.
+# Class inheritance inherets everything, so if there is something you want to change, you have to overwrite
+# it rather than just mixin in the exact modules that you want.
 #
 ##
 
@@ -115,25 +143,32 @@ end
 class ComboAttack
   attr_reader :moves, :damage
 
+  @@moves = []
   def initialize
-    @moves = []
     @damage = 0
   end
 
   def punch
-    @moves << 'punch'
+    @@moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    @@moves << "move #{direction}"
+    self
   end
 
   def kick
-    @moves << 'kick'
+    @@moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    "kick, move, punch"
   end
 
   private
