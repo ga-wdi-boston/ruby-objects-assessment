@@ -20,6 +20,9 @@ Answer = OpenStruct.new
      @location = location
    end
  end
+
+ comfort 2
+ clarity 2
 ##
 
 # Question 2
@@ -32,6 +35,8 @@ Answer = OpenStruct.new
 dave.new= ("Dave", 32, "Ohio")
 dave.replace= ('Ohio', 'Somerville')
 #
+comfort 2
+clarity 2
 
 # Question 3
 # Create another class called Developer that inherits from Person.
@@ -49,7 +54,8 @@ class Developer
   end
 end
 ##
-
+comfort 2
+clarity 2
 ##
 # Question 4
 # Given the code below, what be the output from calling `HouseCat.new.say_hello`?
@@ -85,7 +91,8 @@ end
 Answer.housecat_noise = I am a HouseCat, and I go 'meow'
 in the say hello method, it calls for the mixin sound in HouseCat which is meow
 #
-##
+comfort 2
+clarity 2
 
 # Question 5
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -117,6 +124,8 @@ class Lion
   end
 end
 ##
+comfort 2
+clarity 2
 
 # Question 6
 # What are some of the advantages of using composition (i.e. mixins)
@@ -129,6 +138,8 @@ By using mixins, you write less code and are able to use that code through just 
 calling that mixin.
 #
 ##
+comfort 2
+clarity 2
 
 # Question 7
 # Fix the 'ComboAttack' class below so that calling
@@ -176,3 +187,6 @@ class ComboAttack
     puts "kick,move,punch"
   end
 end
+
+comfort 2
+clarity 2
