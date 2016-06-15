@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -22,8 +32,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
+Answer.dave = dave
 #
 
 # Question 3
@@ -32,7 +43,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -66,9 +81,12 @@ class HouseCat < Cat
 end
 
 ##
-# your answers here
-Answer.housecat_noise = nil
-#
+say_hi = "I am a HouseCat, and I go 'meow'"
+Answer.housecat_noise = say_hi
+# HouseCat.new does not have say_hello on it, so it looks for it on Cat. That
+# doesn't have it either, so it goes and looks for it on Animal. Animal has it,
+# so it puts the string with interpolations that look for self (found as
+# HouseCat) and @sound ('meow' on HouseCat)
 ##
 
 # Question 5
@@ -91,7 +109,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # Question 6
@@ -100,9 +124,10 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
-#
+# A class can only inherit from one other class, whereas a class can include as
+# many modules as needed. Mixins allow easier incorporation of future functionality,
+# and prevents minor changes from having major consequences, often the case in
+# using inheritance
 ##
 
 # Question 7
@@ -120,20 +145,23 @@ class ComboAttack
     @damage = 0
   end
 
-  def punch
+  def self.punch
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
   end
 
-  def move(direction)
+  def self.move(direction)
     @moves << "move #{direction}"
   end
 
-  def kick
+  def self.kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
   end
 
   private
