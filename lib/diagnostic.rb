@@ -12,9 +12,17 @@ Answer = OpenStruct.new
 # Name should be readable and writeable, age should only be readable,
 # and location should only be writable.
 
-##
-# your code here
-##
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 
 # Question 2
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -22,8 +30,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
+Answer.dave = ['Dave', 32, 'Somerville']
 #
 
 # Question 3
@@ -31,9 +40,11 @@ Answer.dave = nil
 # Give it a new instance method called 'solve_problems',
 # which returns the string "think think think".
 
-##
-# your code here
-##
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+end
 
 ##
 # Question 4
@@ -67,8 +78,11 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+# This would be the answer because the look up chain would set sound as "meow"
+# and then go from HouseCat to Cat to Animal looking for the method say_hello.
+#Once say_hello is found inside animal, the #{self} refers to the original object
+#so HouseCat and sound is already set in HouseCat as 'meow'.
 ##
 
 # Question 5
@@ -91,7 +105,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # Question 6
