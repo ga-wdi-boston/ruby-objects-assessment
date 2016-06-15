@@ -13,8 +13,12 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
-##
+class Person
+  initialize(name, age, location)
+  attr_reader :age ##
+  attr_writer :location
+  attr_accessor :name
+end
 
 # Question 2
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -23,7 +27,9 @@ Answer = OpenStruct.new
 
 ##
 # your answers here
-Answer.dave = nil
+Answer.dave = new Person('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
+
 #
 
 # Question 3
@@ -32,13 +38,16 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
 ##
 
 ##
 # Question 4
 # Given the code below, what be the output from calling `HouseCat.new.say_hello`?
-# Store your answer in `Answer.houseCatNoise`.
+# Store your answer in `Answer.housecat_noise`.
 #
 # Then, in a comment on the next line, explain why this would be the output,
 # based on the method lookup chain.
@@ -67,8 +76,11 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
-#
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+Ruby will look for say_hello method on class HouseCat, then on Cat,
+then on Animal (where it is located). Ruby will refer to the first
+self.class.name it finds, which is in HouseCat, and the first sound it finds,
+also in HouseCat.
 ##
 
 # Question 5
@@ -90,9 +102,16 @@ module Carnivorous
   end
 end
 
+
+
+
 ##
-# your code here
-##
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+  ##
 
 # Question 6
 # What are some of the advantages of using composition (i.e. mixins)
@@ -100,8 +119,8 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# A mixin allows for inheritance from more than one module, without overwriting
+# problems that direct inheritance can cause.
 #
 ##
 
@@ -124,16 +143,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def get_possible_moves
+    puts 'kick, move, punch'
   end
 
   private
