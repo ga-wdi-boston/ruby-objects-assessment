@@ -106,10 +106,6 @@ RSpec.describe 'ComboAttack' do
 end
 
 RSpec.describe 'Response' do
-  it 'has a dog' do
-    expect(Response.dog).to be_a(Dog)
-  end
-
   it 'has dave' do
     expect(Response.dave).to be_a(Person)
     expect(Response.dave.instance_variable_get(:@name)).to eq('Dave')
