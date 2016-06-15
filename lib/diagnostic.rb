@@ -13,7 +13,15 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accesor :name
+  attr_reader :age
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location =  location
+  end
+end
 ##
 
 # Question 2
@@ -22,8 +30,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+new_person = Person.new('Dave', 32, 'Ohio')
+new_person[:location] = 'Somerville'
+Answer.dave = new_person
 #
 
 # Question 3
@@ -32,7 +41,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  def solve_problems
+    p 'think think think'
+  end
+end
 ##
 
 ##
@@ -66,9 +79,17 @@ class HouseCat < Cat
 end
 
 ##
-# your answers here
-Answer.housecat_noise = nil
-#
+
+Answer.housecat_noise = 'I am a HouseCat, and I got meow.'
+    # HouseCat inherits properties and methods from Cat, which in this case it is only
+    # one method defined as groom. When HouseCat.new.say_hello is instatianted, its own
+    # initialized method gets called which is the instance variable assigned as 'meow'
+    # and this will be inserted in the string interpolation that is found in the say_hello method.
+    #
+    # Because Cat inherits from the Animal class it will look at its properties and methods and find
+    # say_hello which returns the string that inserts the class' own name and the sound which the house Cat
+    # makes.
+# #
 ##
 
 # Question 5
@@ -91,7 +112,12 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    p 'ROAR'
+  end
+end
 ##
 
 # Question 6
@@ -100,9 +126,10 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
-#
+# Mixins only exist to add functionality to a class and exist independently of the classes,
+# so the advantage here is that you can add them to different classes that are not related
+# to each other. Using direct inheritance will simply extend the class and it's dependent on
+# establishing some sort of relationship.
 ##
 
 # Question 7
@@ -114,7 +141,6 @@ end
 
 class ComboAttack
   attr_reader :moves, :damage
-
   def initialize
     @moves = []
     @damage = 0
@@ -125,8 +151,8 @@ class ComboAttack
     @damage += 5
     @damage *= multiplier
   end
-
-  def move(direction)
+# undefined method for move
+  def move (direction)
     @moves << "move #{direction}"
   end
 
@@ -147,4 +173,9 @@ class ComboAttack
       1
     end
   end
+
+  def get_possible_moves
+    p 'kick, move, punch'
+  end
+
 end
