@@ -12,8 +12,14 @@ Answer = OpenStruct.new
 # Name should be readable and writeable, age should only be readable,
 # and location should only be writable.
 
+
+
 ##
-# your code here
+class Person
+  def initialize(name,age,location)
+    @name = name
+    @age = age
+    @location = location
 ##
 
 # Question 2
@@ -22,8 +28,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+Person.new("Dave", "32", "Ohio")
+Person.new[2] = "Somerville"
+Answer.dave = Person.new
 #
 
 # Question 3
@@ -32,7 +39,8 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer < Person
+  @@solve_problems = "think think think"
 ##
 
 ##
@@ -67,7 +75,7 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = "I am a cat, and I go meow"
 #
 ##
 
@@ -91,7 +99,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < class
+  include Carnivorous
+
+  def roar
+    puts "ROAR"
+  end
+end
 ##
 
 # Question 6
@@ -100,8 +114,8 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
+# You don't have to write the same thing over and over again, that's a huge
+# plus. Then you can also use that functionality in multiple classes
 #
 ##
 
@@ -134,6 +148,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
+    puts "kick, move, punch"
   end
 
   private
