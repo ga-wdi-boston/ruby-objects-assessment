@@ -13,7 +13,17 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 # Question 2
@@ -22,7 +32,8 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
+dave = Answer::Person::new('Dave', 32, 'Ohio')
+Answer.dave = {location: 'Somerville'}
 Answer.dave = nil
 #
 
@@ -32,8 +43,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
-##
+class Developer < Person
+  def solve_problems
+    return 'think think think'
+  end
+end
 
 ##
 # Question 4
@@ -66,9 +80,14 @@ class HouseCat < Cat
 end
 
 ##
-# your answers here
-Answer.housecat_noise = nil
-#
+
+Answer.housecat_noise = "I am a HouseCat, and I go 'meow'"
+#First, we would create a new instance of the class HouseCat, and because we're calling
+# the method say_hello (which is inherited in this chain HouseCat ==> Cat ==> Animal)
+# from Animal, it owuld print the sentence "I am a #{self.class.name}, and I go '#{@sound}'".
+# The values need to be filled in for self.class.name - which is HouseCat, and the
+# sound is pulled from the initialized sound in the HouseCat class.
+
 ##
 
 # Question 5
@@ -91,7 +110,13 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion < Cat
+  include Carnivorous
+
+  def road
+    print 'ROAR!'
+  end
+end
 ##
 
 # Question 6
@@ -100,9 +125,12 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
-#
+# One of the benefits of using composition is that there are built in methods
+# that are attached to these features and you do not need to have a complicated
+# chain of inheritance.  Basically, inheritance can get complicated, especialy when
+# a class inherits from another class which inherits from another class, so
+# composition can simplify things and directly share methods and instance
+# variables between classes.
 ##
 
 # Question 7
@@ -113,11 +141,15 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_reader :moves, :damage, :move
 
   def initialize
     @moves = []
     @damage = 0
+  end
+
+  def get_possible_moves
+    return "kick, move, punch"
   end
 
   def punch
@@ -127,7 +159,7 @@ class ComboAttack
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    @moves << "move #{self.direction}"
   end
 
   def kick
