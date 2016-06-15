@@ -13,8 +13,13 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
-##
+class Person
+  def initialize
+    attr_accessor :name
+    attr_reader :age
+    attr_writer :location
+  end
+end##
 
 # Question 2
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -22,7 +27,14 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
+Person.new
+def
+  :name "Dave"
+  :age 32
+  :location "Ohio"
+
+end
+end
 Answer.dave = nil
 #
 
@@ -32,8 +44,11 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
-##
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+end##
 
 ##
 # Question 4
@@ -67,9 +82,11 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = "I am a HouceCat, and I go 'meow'"
 #
-##
+##This is the output because housecat inherits from cat which inherits from
+##animal. The say_hello method is in housecat from animal and sound is an instance
+#on housecat.
 
 # Question 5
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -91,8 +108,12 @@ module Carnivorous
 end
 
 ##
-# your code here
-##
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR"
+  end
+end##
 
 # Question 6
 # What are some of the advantages of using composition (i.e. mixins)
@@ -100,7 +121,7 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
+# It saves time and make code mobile.
 #
 #
 ##
@@ -136,6 +157,10 @@ class ComboAttack
     @damage *= multiplier
   end
 
+  class << self
+    class get_possible_moves
+  puts "kick, punch, move"
+end
   private
   def multiplier
     case (moves)
