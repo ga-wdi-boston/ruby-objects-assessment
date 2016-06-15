@@ -13,7 +13,13 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+ class Person(name, age, location)
+   def initialize
+     @name = name
+     @age = age
+     @location = location
+   end
+ end
 ##
 
 # Question 2
@@ -22,8 +28,9 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+
+dave.new= ("Dave", 32, "Ohio")
+dave.replace= ('Ohio', 'Somerville')
 #
 
 # Question 3
@@ -32,7 +39,15 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
+class Developer
+  attr_reader :Person
+  def initialize
+
+    def solve_problems
+      puts 'think think think'
+    end
+  end
+end
 ##
 
 ##
@@ -67,7 +82,8 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = I am a HouseCat, and I go 'meow'
+in the say hello method, it calls for the mixin sound in HouseCat which is meow
 #
 ##
 
@@ -91,7 +107,15 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion
+  attr_reader :Cat
+  def initialize
+    @Carnivorous= Carnivorous
+  end
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # Question 6
@@ -101,7 +125,8 @@ end
 
 ##
 # your answer, in comments, here
-#
+By using mixins, you write less code and are able to use that code through just by
+calling that mixin.
 #
 ##
 
@@ -140,11 +165,14 @@ class ComboAttack
   def multiplier
     case (moves)
     when ['punch', 'move left', 'kick']
-      1.5
+      15
     when ['kick', 'punch', 'up']
       2
     else
       1
     end
+  end
+  def get_possible_moves
+    puts "kick,move,punch"
   end
 end
