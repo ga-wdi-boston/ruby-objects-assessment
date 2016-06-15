@@ -13,7 +13,16 @@ Answer = OpenStruct.new
 # and location should only be writable.
 
 ##
-# your code here
+ class Person(name, age, location)
+   def initialize
+     @name = name
+     @age = age
+     @location = location
+   end
+ end
+
+ comfort 2
+ clarity 2
 ##
 
 # Question 2
@@ -22,9 +31,12 @@ Answer = OpenStruct.new
 # Finally, assign the modified Person to `Answer.dave` below.
 
 ##
-# your answers here
-Answer.dave = nil
+
+dave.new= ("Dave", 32, "Ohio")
+dave.replace= ('Ohio', 'Somerville')
 #
+comfort 2
+clarity 2
 
 # Question 3
 # Create another class called Developer that inherits from Person.
@@ -32,9 +44,18 @@ Answer.dave = nil
 # which returns the string "think think think".
 
 ##
-# your code here
-##
+class Developer
+  attr_reader :Person
+  def initialize
 
+    def solve_problems
+      puts 'think think think'
+    end
+  end
+end
+##
+comfort 2
+clarity 2
 ##
 # Question 4
 # Given the code below, what be the output from calling `HouseCat.new.say_hello`?
@@ -67,9 +88,11 @@ end
 
 ##
 # your answers here
-Answer.housecat_noise = nil
+Answer.housecat_noise = I am a HouseCat, and I go 'meow'
+in the say hello method, it calls for the mixin sound in HouseCat which is meow
 #
-##
+comfort 2
+clarity 2
 
 # Question 5
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -91,8 +114,18 @@ module Carnivorous
 end
 
 ##
-# your code here
+class Lion
+  attr_reader :Cat
+  def initialize
+    @Carnivorous= Carnivorous
+  end
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
+comfort 2
+clarity 2
 
 # Question 6
 # What are some of the advantages of using composition (i.e. mixins)
@@ -101,9 +134,12 @@ end
 
 ##
 # your answer, in comments, here
-#
+By using mixins, you write less code and are able to use that code through just by
+calling that mixin.
 #
 ##
+comfort 2
+clarity 2
 
 # Question 7
 # Fix the 'ComboAttack' class below so that calling
@@ -140,11 +176,17 @@ class ComboAttack
   def multiplier
     case (moves)
     when ['punch', 'move left', 'kick']
-      1.5
+      15
     when ['kick', 'punch', 'up']
       2
     else
       1
     end
   end
+  def get_possible_moves
+    puts "kick,move,punch"
+  end
 end
+
+comfort 2
+clarity 2
