@@ -119,9 +119,12 @@ end
 # Write your answer as a comment in the section below.
 
 ##
-# your answer, in comments, here
-#
-#
+# Mixins are good because multiple classes that do not necessarily inherit
+# from each other can all use the same mixins. Also, overwriting should only
+# really happen when necessary so it's useful to have mixins that allow a method
+# to be called independently of inheritance so that a class that is inheriting
+# from other classes can directly access a method rather than rewrite anything
+# in certain instances.
 ##
 
 # Question 7
@@ -155,6 +158,10 @@ class ComboAttack
     @damage *= multiplier
   end
 
+  def get_possible_moves
+    puts 'kick, move, punch'
+  end
+
   private
   def multiplier
     case (moves)
@@ -167,3 +174,7 @@ class ComboAttack
     end
   end
 end
+
+#Not really sure how to solve this except the issue is with the "move"
+#method....looks like its somehow being called on damage but not enough
+#time to complete this. Did the last part of the question though. 
