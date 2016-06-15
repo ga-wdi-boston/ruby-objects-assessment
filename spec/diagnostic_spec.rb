@@ -82,7 +82,7 @@ RSpec.describe 'Lion' do
 
   describe '.roar' do
     it 'prints out "ROAR"' do
-      expect { subject.roar }.to output("ROAR\n").to_stdout
+      expect { subject.roar }.to output("ROAR!\n").to_stdout
     end
   end
 end
