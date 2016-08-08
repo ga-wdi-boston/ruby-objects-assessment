@@ -24,7 +24,15 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+  def initialize(given_name, surname, favorite_food, catchphrase)
+    @name = name
+    @age = age
+    @location = location
+  end
 ##
 
 ##
@@ -33,7 +41,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,7 +52,10 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
 ##
 
 ##
@@ -74,10 +86,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'nil'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+The say_hello method is only defined once and consists of the above sentence.
+The sentence asks for the self.class.name, which is HouseCat, but @sound is not
+set to a class self, so it is in reference to the Animal class, which set
+@sound to nil.
+,
 ##
 
 ##
@@ -100,7 +116,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  includes Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -108,7 +129,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+We will have module code that is reusable accross multiple classes.
 ##
 
 ##
@@ -132,7 +153,7 @@ class ComboAttack
     @damage *= multiplier
   end
 
-  def move(direction)
+  def move (direction)
     @moves << "move #{direction}"
   end
 
