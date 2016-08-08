@@ -24,8 +24,18 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
-##
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+    def initialize
+      @name = name
+      @age = age
+      @location = location
+
+      paul = Person.new(name ,age, person)
+
+##    attr
 
 ##
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -33,7 +43,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = person.New('Dave', 32, "Ohio")
+this.location = "Somervile"
 Response.dave = dave
 ##
 
@@ -43,7 +54,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer
+  include Person
+  def solve_problems
+    puts "think think think"
+  end
 ##
 
 ##
@@ -74,10 +89,13 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# this would be the answer because in the animal class it has an instance of @sound
+# the HouseCat class defines sound as meow. Also HouseCat inherits from Cat which
+# inherits from the Animal class where the method to do the sound as output is
+#done.
 ##
 
 ##
@@ -100,7 +118,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR"
+  end
+end
+
 ##
 
 # #
@@ -108,7 +132,10 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# one of the advantages of doing this is that instead of only being able to inherit
+# 2 layers of classes, using the mixins allows this to happen 'to infinity'. It
+# might not be the cleanest or the most dry, effective way to do it, but it
+# definitely would be better than direct inheritance since there are only 2 layers
 ##
 
 ##
