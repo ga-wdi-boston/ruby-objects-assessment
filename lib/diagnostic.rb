@@ -24,7 +24,14 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  @attr_accessor :name
+  @attr_reader :age
+  @attr_writer :location
+
+  def initialize
+  end
+end
 ##
 
 ##
@@ -33,7 +40,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = "Dave"
+
 Response.dave = dave
 ##
 
@@ -43,7 +51,14 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+
+  def solve_problems
+    puts "think think think"
+  end
+end
+
+
 ##
 
 ##
@@ -74,7 +89,7 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
@@ -97,10 +112,15 @@ module Carnivorous
       puts 'Yuck!'
     end
   end
-end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -108,7 +128,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+It makes the code much more modular and readable.
 ##
 
 ##
@@ -122,24 +142,24 @@ class ComboAttack
   attr_reader :moves, :damage
 
   def initialize
-    @moves = []
-    @damage = 0
+    :moves = []
+    :damage = 0
   end
 
   def punch
-    @moves << 'punch'
-    @damage += 5
-    @damage *= multiplier
+    :moves << 'punch'
+    :damage += 5
+    :damage *= multiplier
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    :moves << "move #{direction}"
   end
 
   def kick
-    @moves << 'kick'
-    @damage += 10
-    @damage *= multiplier
+    :moves << 'kick'
+    :damage += 10
+    :damage *= multiplier
   end
 
   private
