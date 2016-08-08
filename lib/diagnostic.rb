@@ -24,7 +24,18 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+# person class
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,13 +55,18 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
 # Study the code below before responding.
 # Then, in a comment on the next line,
 
+# top line comment
 class Animal
   def initialize
     @sound = nil
@@ -60,12 +77,14 @@ class Animal
   end
 end
 
+# top line comment
 class Cat < Animal
   def groom
     puts 'lick... lick...'
   end
 end
 
+# top line comment
 class HouseCat < Cat
   def initialize
     @sound = 'meow'
@@ -74,17 +93,25 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a House Cat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# When you create a new HouseCat it inherits from Cat and from Animal. The
+# say_hello method doesn't exist on HouseCat so it looks at Cat which also
+# doesn't have a method by that name. It looks up and finds it on Animal. The
+# string that prints has #{self.class.name} which I believe would evaluate to
+# HouseCat because that is the class the method is being called on. It also has
+# #{sound} which was initialized as 'meow' when we created a new instance of
+# Housecat.
 ##
+
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
 
+# comment
 module Carnivorous
   def can_eat_meat?
     true
@@ -100,7 +127,14 @@ module Carnivorous
 end
 
 ##
-# your response here
+# Lion clas
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    p 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -108,7 +142,11 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Mixins allow you to describe a type of behaviour that can be shared by many
+# unrelated classes. Inheritance is more strict and means that the new class
+# is encapsulated by the class it inherited from. Mixins let you describe some
+# behaviour and easily place it into any class you want without it having to
+# be directly tied to another class.
 ##
 
 ##
@@ -118,6 +156,7 @@ end
 # Then, create a new class method called "get_possible_moves",
 # which returns the string "kick, move, punch"
 
+# comment
 class ComboAttack
   attr_reader :moves, :damage
 
@@ -143,11 +182,12 @@ class ComboAttack
   end
 
   private
+
   def multiplier
-    case (moves)
-    when ['punch', 'move left', 'kick']
+    case moves
+    when %w(punch 'move left' kick)
       1.5
-    when ['kick', 'punch', 'up']
+    when %w(kick punch up)
       2
     else
       1
