@@ -24,7 +24,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
 ##
 
 ##
@@ -35,6 +45,9 @@ Response = OpenStruct.new
 ## replace nil with your response, then continue your work on the next line
 dave = nil
 Response.dave = dave
+
+dave = Person.new("Dave", 32, "Ohio")
+dave.location("Somerville")
 ##
 
 ##
@@ -43,7 +56,10 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+Developer > Person
+  def solve_problems
+    "think think think"
+  end
 ##
 
 ##
@@ -74,16 +90,38 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go meow"
+
+
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
 
+HouseCat inherits the method say_hello from Animal but sound is assign 'meow'
+in when HouseCat was created.
 ##
+
+class Lion < Cat
+
+  include Carnivorous
+
+  def initialize
+    @sound = 'ROAR!'
+  end
+
+  def roar
+    puts 'ROAR!'
+  end
+end
+
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
+
+
+
+
 
 module Carnivorous
   def can_eat_meat?
