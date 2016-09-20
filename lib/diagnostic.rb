@@ -23,8 +23,19 @@ Response = OpenStruct.new
 # readable and writeable, age should only be readable, and location should only
 # be writable.
 
+
+
 ##
-# your response here
+class Person (name, age, location)
+  attr_reader :age
+  attr_writer :location
+  attr_accessor :name
+  def initialize
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -32,8 +43,11 @@ Response = OpenStruct.new
 # Then, in the next line, change this Person's location property to
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
+
+
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new( 'Dave',32, 'Ohio' )
+dave = Person.new( 'Dave',32, 'Somerville' )
 Response.dave = dave
 ##
 
@@ -42,8 +56,15 @@ Response.dave = dave
 # Give it a new instance method called 'solve_problems',
 # which returns the string "think think think".
 
+
+
 ##
-# your response here
+class Developer < Person
+
+def solve_problems
+  return "think think think"
+end
+end
 ##
 
 ##
@@ -74,7 +95,7 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a Cat, and I go meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
