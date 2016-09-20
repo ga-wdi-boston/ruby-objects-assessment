@@ -24,6 +24,7 @@ Response = OpenStruct.new
 # be writable.
 
 ##
+# Person class
 class Person
   attr_accessor :name
   attr_reader :age
@@ -42,8 +43,8 @@ end
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = Person.new("Dave", 32, "Ohio")
-dave.location = "Somerville"
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -53,7 +54,12 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+# Developer class
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
