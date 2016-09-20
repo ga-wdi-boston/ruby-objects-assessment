@@ -24,7 +24,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+# Person class
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +43,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,13 +54,19 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+# Developer class
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
 # Study the code below before responding.
 # Then, in a comment on the next line,
 
+# Animal class
 class Animal
   def initialize
     @sound = nil
@@ -60,12 +77,14 @@ class Animal
   end
 end
 
+# Cat class inheriting from Animal
 class Cat < Animal
   def groom
     puts 'lick... lick...'
   end
 end
 
+# HouseCat class inheriting from Cat
 class HouseCat < Cat
   def initialize
     @sound = 'meow'
@@ -74,10 +93,15 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# Neither the instance of HouseCat nor the HouseCat class have a say_hello
+# method, so the method is inherited from the nearest ancestor that does have
+# the method, which is Animal. When the say_hello method is executed, it traces
+# inheritance again to find the closest value for self.class.name (which it
+# finds first on class HouseCat), and again for @sound, which it finds on the
+# instance of HouseCat. This results in the output shown above.
 ##
 
 ##
@@ -100,7 +124,14 @@ module Carnivorous
 end
 
 ##
-# your response here
+# Lion class inheriting from Cat and using Carnivorous mixin
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -108,7 +139,14 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# A class may only inherit from one other class, but it may include multiple
+# mixins. This allows us more flexibility when determining what behaviors a new
+# class will exhibit, and allows allows for different concerns to be separated
+# over different mixins when grouping related behaviors together.
+
+# Since mixins # provide a class with behavior only, rather than both behavior
+# and state, # composition makes it simpler to maintain the desire state in a
+# class - there # is only once place to look for it.
 ##
 
 ##
@@ -126,23 +164,31 @@ class ComboAttack
     @damage = 0
   end
 
+  def self.get_possible_moves
+    return 'kick, move, punch'
+  end
+
   def punch
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
+
   def multiplier
     case (moves)
     when ['punch', 'move left', 'kick']
