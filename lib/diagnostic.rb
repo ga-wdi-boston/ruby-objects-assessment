@@ -24,7 +24,18 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+ class Person
+   attr_accessor :name
+   attr_reader :age
+   attr_writer :location
+
+    def initialize(name, age, location)
+      @name = name
+      @age = age
+      @location = location
+
+    end
+  end
 ##
 
 ##
@@ -33,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.Person.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def initialize
+  @solve_problems = 'think think think'
+  end
+end
 ##
 
 ##
@@ -74,12 +90,15 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go 'meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+In the animal class self is used in order to allow for super inheritance to occur
+and allow the method lookup chain to act on the new classes and instances of those classes
+that calls on animal. In this case, HouseCat calls on Cat which has inherited Animal,
+so HouseCat inherits the Animal class.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -100,7 +119,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
+
 ##
 
 # #
@@ -108,7 +133,10 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+Direct inheritance can sometimes have limitations so mixins are a better alternative.
+Mixins allow you to use chunks of code across multiple classes which helps keep your
+code DRY and flexibile.
+
 ##
 
 ##
@@ -119,7 +147,7 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_reader :moves, :damage, :move, :kick
 
   def initialize
     @moves = []
