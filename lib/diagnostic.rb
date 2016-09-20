@@ -24,7 +24,15 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  def initialize
+    attr_reader :name, :age
+    attr_writer :name, :location
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +41,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
 Response.dave = dave
 ##
 
@@ -43,7 +52,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+Class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -74,10 +87,16 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# Line 72 defines the method `say_hello`, and since the class HouseCat inherits
+# from the class `Cat`, and the class `Cat` inherits from the class `Animal`,
+# the inheritance chain tells us to look at `Animal` to see how `say_hello` is
+# defined. So when we call `Response.housecat_noise`, it is executed on the
+# instance of `HouseCat`, and since `@sound` was defined as `meow`, that is
+# the string that that gets `put` in `#{@sound}`.
+#
 ##
 
 ##
@@ -100,7 +119,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+Class Lion < Cat
+  def roar
+    puts "ROAR!"
+  end
+# UNFINISHED ANSWER; RUNNING LOW ON TIME, WANTED TO MOVE ON TO TRY TO AT LEAST
+# PARTIALLY ANSWER ALL QUESTIONS
 ##
 
 # #
@@ -108,7 +132,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# RAN OUT OF TIME
 ##
 
 ##
@@ -130,16 +154,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+  "kick, move, punch"
   end
 
   private
