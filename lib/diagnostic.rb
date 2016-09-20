@@ -24,7 +24,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def instantiate(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
 ##
 
 ##
@@ -33,7 +43,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new(name: 'Dave', age: 32, location: 'Ohio')
+Dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,7 +54,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -74,11 +89,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
+## The method lookup chain allows classes to inherit traits from other classes.
+#In this case, HouseCat inherits traits from Cat which inherits traits from
+#Animal. It looks for the method, say_hello, starting at HouseCat. When it can't
+#find it, it moves to Cat and then to Animal where it is located.
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -100,7 +118,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -108,7 +131,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+#Using composition allows for less code to be written. It also allows for reusability
+#across different types of classes.
 ##
 
 ##
@@ -127,7 +151,7 @@ class ComboAttack
   end
 
   def punch
-    @moves << 'punch'
+    @move << 'punch'
     @damage += 5
     @damage *= multiplier
   end
@@ -140,6 +164,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
+    puts "#{kick.move}, #{move.moves}, #{punch.move}"
   end
 
   private
