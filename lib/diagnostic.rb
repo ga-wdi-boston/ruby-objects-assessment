@@ -24,7 +24,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initalize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,8 +42,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new("Dave", 32, "Ohio")
+Response.dave = dave.location = "Somerville"
 ##
 
 ##
@@ -43,7 +52,14 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def initialize
+
+  def solve_problems
+    puts "think think think"
+  end
+  end
+end
 ##
 
 ##
@@ -74,12 +90,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a #{HouseCat}, and I go '#{meow}'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# In this context, self refers to the class that the method is invoked on (HouseCat).
+# the say_hello method calls the @sound instance variable of the HouseCat class
+# and puts "meow".
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -100,7 +118,14 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def initialize
+
+  def roar
+    p "ROAR!"
+  end
+end
 ##
 
 # #
@@ -108,7 +133,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Direct inheritance is single state. classes can only inherit from 1 other class.
+# mixins allow for mutiple inheritance.
 ##
 
 ##
@@ -142,10 +168,14 @@ class ComboAttack
     @damage *= multiplier
   end
 
+def get_possible_moves
+  puts ComboAttack.instance_methods
+end
+
   private
   def multiplier
     case (moves)
-    when ['punch', 'move left', 'kick']
+    when ['kick','punch', 'move left']
       1.5
     when ['kick', 'punch', 'up']
       2
