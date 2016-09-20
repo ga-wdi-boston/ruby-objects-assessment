@@ -66,6 +66,7 @@ end
 # Study the code below before responding.
 # Then, in a comment on the next line,
 
+# Animal class
 class Animal
   def initialize
     @sound = nil
@@ -76,12 +77,14 @@ class Animal
   end
 end
 
+# Cat class inheriting from Animal
 class Cat < Animal
   def groom
     puts 'lick... lick...'
   end
 end
 
+# HouseCat class inheriting from Cat
 class HouseCat < Cat
   def initialize
     @sound = 'meow'
@@ -90,10 +93,15 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# Neither the instance of HouseCat nor the HouseCat class have a say_hello
+# method, so the method is inherited from the nearest ancestor that does have
+# the method, which is Animal. When the say_hello method is executed, it traces
+# inheritance again to find the closest value for self.class.name (which it
+# finds first on class HouseCat), and again for @sound, which it finds on the
+# instance of HouseCat. This results in the output shown above.
 ##
 
 ##
@@ -116,7 +124,14 @@ module Carnivorous
 end
 
 ##
-# your response here
+# Lion class inheriting from Cat and using Carnivorous mixin
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
