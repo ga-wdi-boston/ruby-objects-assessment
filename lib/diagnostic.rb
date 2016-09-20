@@ -24,7 +24,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize (name, age, location)
+    @name = name
+    @age= age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,8 +42,15 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+
 Response.dave = dave
+
+dave = {}
+dave = Hash.new('')
+dave = [:characteristics]
+dave = { given_name: 'Dave', age: '32', location: 'Ohio'}
+dave[:location] = Somerville
+dave.merge!({ location: Somerville})
 ##
 
 ##
@@ -43,7 +59,9 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+# class = 'Developer'
+#
+# class = Person
 ##
 
 ##
@@ -74,12 +92,13 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat and I go meow"
+
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+Because it is calling @meow and its class is HouseCat
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -106,10 +125,10 @@ end
 # #
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
+Use mixins unless the class you are writing is the thing you are inheriting from.
+Examples: As in a dog is an animal. Sure is a rectangle. A deck of cards can be
+enumerated, it is not an enumerable.
 
-##
-# your response as a comment here
-##
 
 ##
 # Fix the 'ComboAttack' class below so that calling
