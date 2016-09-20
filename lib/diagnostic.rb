@@ -152,19 +152,27 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def possible_moves
+    'kick, move, punch'
   end
 
   private
+
   def multiplier
     case (moves)
     when ['punch', 'move left', 'kick']
