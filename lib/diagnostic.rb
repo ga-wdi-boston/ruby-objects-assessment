@@ -24,7 +24,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +43,9 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
+
 Response.dave = dave
 ##
 
@@ -43,13 +55,17 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
 # Study the code below before responding.
 # Then, in a comment on the next line,
-
+#
 class Animal
   def initialize
     @sound = nil
@@ -74,10 +90,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a HouseCat, and I go meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# HouseCat has the method say_hello from Animal and makes the sound meow because
+# it is a housecat. If it's sound had not been defined I think it would revert
+# to the nil assignment from Animal.
 ##
 
 ##
@@ -100,7 +118,16 @@ module Carnivorous
 end
 
 ##
-# your response here
+#
+class Lion < Cat
+  include Carnivorous
+  def initialize
+  end
+
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -108,7 +135,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Mixins are just going to consist of methods so if you don't want to inherit
+# any attributes, mixins are the best to use.
 ##
 
 ##
@@ -117,9 +145,9 @@ end
 #
 # Then, create a new class method called "get_possible_moves",
 # which returns the string "kick, move, punch"
-
+#
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_reader :moves, :damage, :kick
 
   def initialize
     @moves = []
@@ -130,6 +158,7 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
@@ -140,6 +169,7 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
