@@ -139,7 +139,14 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# A class may only inherit from one other class, but it may include multiple
+# mixins. This allows us more flexibility when determining what behaviors a new
+# class will exhibit, and allows allows for different concerns to be separated
+# over different mixins when grouping related behaviors together.
+
+# Since mixins # provide a class with behavior only, rather than both behavior
+# and state, # composition makes it simpler to maintain the desire state in a
+# class - there # is only once place to look for it.
 ##
 
 ##
@@ -157,23 +164,31 @@ class ComboAttack
     @damage = 0
   end
 
+  def self.get_possible_moves
+    return 'kick, move, punch'
+  end
+
   def punch
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
+
   def multiplier
     case (moves)
     when ['punch', 'move left', 'kick']
