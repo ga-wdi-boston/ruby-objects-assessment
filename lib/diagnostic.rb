@@ -1,3 +1,4 @@
+#
 require 'ostruct'
 Response = OpenStruct.new
 
@@ -24,7 +25,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -74,10 +90,16 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a HouseCat, and I go meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# HouseCat inherits from Cat, which inherits from Animal. When HouseCat.new is
+# called, a new instance of HouseCat is created and is assigned @sound = 'meow'.
+# When .say_hello is called, Ruby first looks for the method on the new instance
+# of HouseCat. It doesn't find it, so it looks at the class HouseCat, then the
+# class Cat, then the class Animal, where it finally finds it. The say_hello
+# method then calls self, which in this case is the instance of the Animal. The
+# class of this instance is HouseCat, and the @sound of this instance is meow.
 ##
 
 ##
@@ -100,7 +122,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -108,7 +135,13 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# In Ruby, objects can only have single inheritance, so modules allow a class
+# to have many mixins rather than just one. Further, it sometimes makes more
+# semantic sense to use a mixin to describe behavior as opposed to a
+# relationship. In the above example, a Lion is a type of Cat, but a Lion is
+# not a type of Carnivorous; a Lion does have behavior consistent with other
+# Carnivorous things though, so a mixin is more appropriate than inheritance in
+# this case.
 ##
 
 ##
@@ -130,16 +163,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    puts 'kick, move, punch'
   end
 
   private
