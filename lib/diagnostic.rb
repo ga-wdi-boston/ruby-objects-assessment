@@ -179,6 +179,8 @@ class ComboAttack
       1.5
     when ['kick', 'punch', 'up']
       2
+    when ['up', 'up', 'down', 'down', 'left', 'right','left','right','punch','kick']
+      9999
     else
       1
     end
