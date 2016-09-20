@@ -23,9 +23,17 @@ Response = OpenStruct.new
 # readable and writeable, age should only be readable, and location should only
 # be writable.
 
-##
-# your response here
-##
+# This is a Person class
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 
 ##
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -33,7 +41,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -42,14 +51,16 @@ Response.dave = dave
 # Give it a new instance method called 'solve_problems',
 # which returns the string "think think think".
 
-##
-# your response here
-##
+# Developer class inherits from Person
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 
 ##
 # Study the code below before responding.
 # Then, in a comment on the next line,
-
 class Animal
   def initialize
     @sound = nil
@@ -74,10 +85,20 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
+##
+
+##
+# HouseCat.new creates a new instance of the HouseCat class.
+# "Self" inside this instance is the instance, so self.class.name will be
+# the name of that instance's class (HouseCat).
+# HouseCats have an instance variable @sound that is set to 'meow'
+# The method defined in the ancestor class Animal will use 
+# HouseCat's instance variable, which effectively overwrites the @sound 
+# instance variable set in Animal.
 ##
 
 ##
@@ -100,15 +121,25 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!'
+  end
+end
+
 ##
 
 # #
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
 
-##
-# your response as a comment here
+## 
+# Classes in Ruby can only inherit from one other class. This limits the
+# number of potential methods that are available to the child class. Using
+# mixins lets a class take advantage of methods that are definined in multiple
+# modules/mixins. 
 ##
 
 ##
@@ -126,20 +157,27 @@ class ComboAttack
     @damage = 0
   end
 
+  def self.get_possible_moves
+    'kick, move, punch'
+  end
+
   def punch
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
@@ -153,4 +191,5 @@ class ComboAttack
       1
     end
   end
+
 end
