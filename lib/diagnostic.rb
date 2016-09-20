@@ -24,7 +24,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +43,9 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -74,17 +90,17 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# HouseCat has no method "say_hello" declared on it, so Ruby looks to any classes it inherited.  HouseCat inherits from Cat, but it also does not have a method "say_hello", so Ruby goes to any classes that Cat inherits.  Cat inherits Animal, which does in fact have a "say_hello" method.  Say_hello checks for the name of the class on the object that is calling it (in our case, HouseCat, and outputs the instance variable @sound, which we initialized as 'meow' for HouseCat).
 ##
-
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
 
+# nom nom nom
 module Carnivorous
   def can_eat_meat?
     true
@@ -100,7 +116,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+# meow
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -108,7 +130,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Since Ruby only has single inheritance, you MUST use mixins if you want to 'inherit' from more than just a single source.  You can include/extend multiple mixins with a class, but a class can still only inherit from a single other class.  Including modules at least allows you to inherit behaviors from multiple sources.
 ##
 
 ##
