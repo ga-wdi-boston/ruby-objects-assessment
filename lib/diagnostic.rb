@@ -24,7 +24,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_writer :location
+  attr_accessor :name
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,8 +42,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new('Dave', 32, 'Ohio')
+Response.dave = dave.location('Somerville')
 ##
 
 ##
@@ -43,7 +52,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -74,10 +87,11 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a HouseCat, and I go meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# HousecCat inherits from Cat and Cat inherits from Animal. Therefore, HouseCat
+# has access to the say_hello method.
 ##
 
 ##
@@ -100,7 +114,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    ROAR!
+  end
+end
 ##
 
 # #
@@ -108,7 +127,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Two very different classes, such as a Person and a Computer, can have a shared
+# behavior. Inheritance would be inappropriate.
 ##
 
 ##
@@ -119,7 +139,7 @@ end
 # which returns the string "kick, move, punch"
 
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_reader :moves, :damage, :get_possible_moves
 
   def initialize
     @moves = []
@@ -127,19 +147,23 @@ class ComboAttack
   end
 
   def punch
-    @moves << 'punch'
-    @damage += 5
-    @damage *= multiplier
+    moves << 'punch'
+    damage += 5
+    damage *= multiplier
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    moves << "move #{direction}"
   end
 
   def kick
-    @moves << 'kick'
-    @damage += 10
-    @damage *= multiplier
+    moves << 'kick'
+    damage += 10
+    damage *= multiplier
+  end
+
+  def get_possible_moves
+    'kick, move, punch'
   end
 
   private
