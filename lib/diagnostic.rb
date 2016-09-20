@@ -24,7 +24,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +42,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,7 +53,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'Think think think'
+  end
+end
 ##
 
 ##
@@ -74,10 +88,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a HouseCat, and I go "meow"'
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+## Calling a new instance of HouseCat initializes the sound to 'meow'. There
+## is no say_hello in HouseCat, so it looks up to its parent, Cat. Nothing
+## there either, so it looks up to Cat's parent, Animal. say_hello is
+## instantiated there, with the appropriate string that is filled with the
+## type of animal and the sound it makes.
 ##
 
 ##
@@ -100,7 +118,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -108,7 +131,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# They circumvent the need for multiple inheritance. Module's methods are now
+# available for methods of the class
 ##
 
 ##
