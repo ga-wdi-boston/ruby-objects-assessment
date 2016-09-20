@@ -24,7 +24,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -34,7 +43,8 @@ Response = OpenStruct.new
 
 ## replace nil with your response, then continue your work on the next line
 dave = nil
-Response.dave = dave
+Response.dave = dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
 ##
 
 ##
@@ -43,7 +53,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+Class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
 ##
 
 ##
@@ -74,10 +88,10 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# because Housecat inherits from Cat which inherits from Animal which is where the say_hello method lives.
 ##
 
 ##
@@ -100,7 +114,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    "ROAR!"
+  end
+end
 ##
 
 # #
@@ -108,7 +128,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# it allows you to reuse mixins on different classes.
 ##
 
 ##
