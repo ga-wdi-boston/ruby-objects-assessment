@@ -24,7 +24,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +43,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', '32', 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -43,12 +54,15 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
 # Study the code below before responding.
-# Then, in a comment on the next line,
 
 class Animal
   def initialize
@@ -74,10 +88,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# say_hello looks to the instance HouseCat for the method say_hello, does not find it,
+#   and then looks to the method Cat, which HouseCat inherits from. say_hello
+#   then looks to Animal, where it finds the method. The method say_hello is run on the
+#   instance of HouseCat, wherein HouseCat.new makes a new instance of the class HouseCat
+#   initialized with the @sound meow.
 ##
 
 ##
@@ -100,7 +118,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    p 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -108,12 +131,13 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Mixins allow you to draw from multiple sources/modules whereas direct inheritance
+# does not.
 ##
 
 ##
 # Fix the 'ComboAttack' class below so that calling
-# `ComboAttack.new.punch.move('left').kick.damage` doesn't cause an error.
+# `ComboAttack.new.punch.move('left').kick.damage` doesn't cause an error. <-- not sure how to do this?
 #
 # Then, create a new class method called "get_possible_moves",
 # which returns the string "kick, move, punch"
@@ -142,7 +166,12 @@ class ComboAttack
     @damage *= multiplier
   end
 
+  def get_possible_moves
+    'kick, move, punch!'
+  end
+
   private
+
   def multiplier
     case (moves)
     when ['punch', 'move left', 'kick']
