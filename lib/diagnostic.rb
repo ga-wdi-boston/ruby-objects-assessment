@@ -24,7 +24,15 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,7 +41,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -44,12 +53,18 @@ Response.dave = dave
 
 ##
 # your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
 # Study the code below before responding.
 # Then, in a comment on the next line,
 
+# Animal
 class Animal
   def initialize
     @sound = nil
@@ -72,14 +87,19 @@ class HouseCat < Cat
   end
 end
 
+
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# HouseCat inherits from Cat.
+# Cat inherits from Animal.
+# When Housecat.new is called, it initializes sound to 'meow'. When the
+# say_hello method is aclled, it looks for the method in Cat, doesnt find it up
+# there, so looks up at Animal, and calls that method.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -100,7 +120,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    'ROAR!'
+  end
+end
 ##
 
 # #
@@ -140,6 +165,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def self.get_possible_moves
+    "kick, move, punch"
   end
 
   private
