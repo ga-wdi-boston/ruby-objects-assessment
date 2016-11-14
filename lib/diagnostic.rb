@@ -22,10 +22,17 @@ Response = OpenStruct.new
 # attributes should be defined when you instantiate a new Person. Name should be
 # readable and writeable, age should only be readable, and location should only
 # be writable.
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
 
-##
-# your response here
-##
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 
 ##
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -33,7 +40,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -41,15 +49,15 @@ Response.dave = dave
 # Create another class called Developer that inherits from Person.
 # Give it a new instance method called 'solve_problems',
 # which returns the string "think think think".
-
-##
-# your response here
-##
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 
 ##
 # Study the code below before responding.
 # Then, in a comment on the next line,
-
 class Animal
   def initialize
     @sound = nil
@@ -60,6 +68,7 @@ class Animal
   end
 end
 
+# this be a cat
 class Cat < Animal
   def groom
     puts 'lick... lick...'
@@ -74,17 +83,19 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
-
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
+
+# The instance of the HouseCat calls HouseCat initialize which overrides the
+# Cat and Animal initialize, so @sound is meow. When say_hello is called it
+# looks first in HouseCat, then Cat, and finally finds it in Animal.
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
-
 module Carnivorous
   def can_eat_meat?
     true
@@ -99,16 +110,26 @@ module Carnivorous
   end
 end
 
-##
-# your response here
-##
+# this be a lion
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!' # --JAF-- The instructions say to PRINT 'ROAR!', but the test checks for PUTS (also a form of print, but minor annoyance)
+  end
+end
 
 # #
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# One advantage is that Ruby 'does not' (not 100% sure you can't do it, but from
+# what I've read it is not likely) support multiple inheritance, so composition
+# is a way to get some functionality that multiple inheritance might typically
+#  provide. Mixins also give added functionality to classes/objects. If you are
+# going to need to reuse a function a lot, instead of writing it in every class
+# that needs it, using a mixin keeps it mad DRY. So, so DRY.
 ##
 
 ##
@@ -117,7 +138,6 @@ end
 #
 # Then, create a new class method called "get_possible_moves",
 # which returns the string "kick, move, punch"
-
 class ComboAttack
   attr_reader :moves, :damage
 
@@ -130,16 +150,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    'kick, move, punch'
   end
 
   private
