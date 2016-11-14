@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'ostruct'
 Response = OpenStruct.new
 
@@ -24,17 +25,27 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
-##
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
 
+  initialize(name, age, location)
+  @name = name
+  @age = age
+  @location = location
+end
+##
+person = Person.new(1, 2, 3)
 ##
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
 # Then, in the next line, change this Person's location property to
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
 Response.dave = dave
+dave.location = 'Somerville'
 ##
 
 ##
@@ -43,7 +54,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_perblems
+    p 'think think think'
+  end
+end
 ##
 
 ##
@@ -74,12 +89,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a Animal, and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+#Self in say hello sees Animal class but sound sees HouseCat
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -100,15 +115,21 @@ module Carnivorous
 end
 
 ##
-# your response here
-##
+class Lion < Cat
+  include Carnivorous
+
+  def poar
+    p 'ROAR!'
+  end
+end
+  ##
 
 # #
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# It can be applied on a case by case basis so you don't have to incluse it on every instance of a class
 ##
 
 ##
@@ -143,11 +164,12 @@ class ComboAttack
   end
 
   private
+
   def multiplier
-    case (moves)
+    case moves
     when ['punch', 'move left', 'kick']
       1.5
-    when ['kick', 'punch', 'up']
+    when %w(kick punch up)
       2
     else
       1
