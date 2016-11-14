@@ -24,7 +24,14 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+Class Person(name, age, location)
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+    @name = name
+    @age = age
+    @location = location
+end
 ##
 
 ##
@@ -43,7 +50,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+Class Developer < Person
+  def solve_problems
+    put 'think think think'
+  end
+end
 ##
 
 ##
@@ -74,16 +85,20 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "'lick... lick...''I am a animal and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+Calling HouseCat, initilizes @sound as 'meow', goes up to Cat, puts 'lick...lick'
+which is an instance method of Class Animal, which calls say_hello, which puts
+"I am a #{self.class.name}, and I go '#{@sound}'", self refers to Class Animal, and @sound
+refers to an initialized sound, which was defined with HouseCat.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
+
 
 module Carnivorous
   def can_eat_meat?
@@ -100,15 +115,18 @@ module Carnivorous
 end
 
 ##
-# your response here
-##
+Class Lion < Cat
+  def roar
+    puts 'ROAR!'
+  end
+  ##
 
 # #
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# They can be very specific to the already specific instance of the Class
 ##
 
 ##
