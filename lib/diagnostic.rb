@@ -154,7 +154,7 @@ end
 class ComboAttack
   attr_accessor :moves, :damage
 
-  def self.initialize
+  def initialize
     @moves = []
     @damage = 0
   end
@@ -163,20 +163,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
-  def self.move(direction)
+  def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
-  def self.kick
+  def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
-  def get_possible_moves
-    stuff = "kick, move, punch"
+  def self.get_possible_moves
+    "kick, move, punch"
   end
 
   private
