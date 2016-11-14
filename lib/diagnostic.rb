@@ -24,7 +24,15 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+  def initialize (name, location, age)
+    @name = name
+    @location = location
+  end
+end
 ##
 
 ##
@@ -33,8 +41,9 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new('Dave', 'Ohio', 32)
+dave.location = 'Somerville'
+Response.dave = <Person:0x007f9e5ee3d560 @location="Boston", @name="Dave">
 ##
 
 ##
@@ -43,7 +52,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    p 'think think think'
+  end
+end
 ##
 
 ##
@@ -74,13 +87,15 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a HouseCat, and I go meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
 
-##
+# This happens because Animal is inherited to Cat which is then inherited to HouseCat
+# so when we call the method say_hello on HouseCat it will look up the chain to find how it should use that method
+
+
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
@@ -100,7 +115,17 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  require 'Carnivorous'
+  def Carnivorous.can_eat_meat?
+  end
+
+  def roar
+    p 'ROAR'
+  end
+
+
+end
 ##
 
 # #
@@ -108,7 +133,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# It assists in making the code more modular so it can be used in multiple situations as opposed to being repetitive
+# or creating sloppy and potentially confusing look up chains.
 ##
 
 ##
@@ -140,6 +166,10 @@ class ComboAttack
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+  end
+
+  def get_possible_moves
+    p 'kick, move, punch'
   end
 
   private
