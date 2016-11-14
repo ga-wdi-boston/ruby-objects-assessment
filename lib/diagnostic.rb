@@ -33,7 +33,7 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = dave
 Response.dave = dave
 ##
 
@@ -43,7 +43,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def initialize
+    @solve_problems = "think think think"
+  end
+
 ##
 
 ##
@@ -74,16 +78,19 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a cat, and I go 'meow'.
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+'Cat' is the parent that "HouseCat" inherits from. and the new.say_hello is a
+string that also has the sound placed in it.
 ##
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
+
+class Lion < Cat
 
 module Carnivorous
   def can_eat_meat?
@@ -98,9 +105,11 @@ module Carnivorous
     end
   end
 end
-
+def ROAR
+  puts "ROAR"
+end
+end
 ##
-# your response here
 ##
 
 # #
@@ -108,7 +117,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+mixins help make things easier by being able to just add certain methods or
+attributes together instead of writing out code for every new class you include
+in your code.
 ##
 
 ##
@@ -145,7 +156,7 @@ class ComboAttack
   private
   def multiplier
     case (moves)
-    when ['punch', 'move left', 'kick']
+    when ['punch', 'left', 'kick']
       1.5
     when ['kick', 'punch', 'up']
       2
