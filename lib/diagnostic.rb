@@ -117,7 +117,7 @@ end
 
 ##
 class Lion < Cat
-  Includes Carnivorous
+  include Carnivorous
 
   def roar
     puts 'ROAR!'
