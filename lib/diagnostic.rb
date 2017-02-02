@@ -149,7 +149,7 @@ end
 # Fix the 'ComboAttack' class below so that calling
 # `ComboAttack.new.punch.move('left').kick.damage` doesn't cause an error.
 #
-# Then, create a new class method called "get_possible_moves",
+# Then, create a new class method called "possible_moves",
 # which returns the string "kick, move, punch"
 
 # ComboAttack Class definition
@@ -180,7 +180,7 @@ class ComboAttack
     self
   end
 
-  def self.get_possible_moves
+  def self.possible_moves
     'kick, move, punch'
   end
 
@@ -188,9 +188,9 @@ class ComboAttack
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w(punch move left kick)
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w(kick punch up)
       2
     else
       1

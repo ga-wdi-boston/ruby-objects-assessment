@@ -96,13 +96,13 @@ RSpec.describe 'ComboAttack' do
     expect { ComboAttack.new.kick.punch.kick }.not_to raise_error
   end
 
-  it 'has ::get_possible_moves' do
-    expect { ComboAttack.get_possible_moves }.not_to raise_error
+  it 'has ::possible_moves' do
+    expect { ComboAttack.possible_moves }.not_to raise_error
   end
 
-  describe '::get_possible_moves' do
+  describe '::possible_moves' do
     it 'returns the string "kick, move, punch"' do
-      expect(ComboAttack.get_possible_moves).to eq('kick, move, punch')
+      expect(ComboAttack.possible_moves).to eq('kick, move, punch')
     end
   end
 end
