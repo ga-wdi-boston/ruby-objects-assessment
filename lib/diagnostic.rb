@@ -50,7 +50,6 @@ Response.dave = dave
 
 ##
 # Study the code below before responding.
-# Then, in a comment on the next line,
 
 # Animal Class
 class Animal
