@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/diagnostic.rb'
 
 RSpec.describe 'Person' do

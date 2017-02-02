@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ostruct'
 Response = OpenStruct.new
 
@@ -50,6 +52,7 @@ Response.dave = dave
 # Study the code below before responding.
 # Then, in a comment on the next line,
 
+# Animal Class
 class Animal
   def initialize
     @sound = nil
@@ -60,12 +63,14 @@ class Animal
   end
 end
 
+# Cat Class inherits from Animal
 class Cat < Animal
   def groom
     puts 'lick... lick...'
   end
 end
 
+# HouseCat class inherits from Cat, then Animal
 class HouseCat < Cat
   def initialize
     @sound = 'meow'
@@ -85,6 +90,7 @@ Response.housecat_noise = nil
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
 
+# Carnivorous module definition
 module Carnivorous
   def can_eat_meat?
     true
@@ -118,6 +124,7 @@ end
 # Then, create a new class method called "get_possible_moves",
 # which returns the string "kick, move, punch"
 
+# ComboAttack Class definition
 class ComboAttack
   attr_reader :moves, :damage
 
@@ -143,11 +150,12 @@ class ComboAttack
   end
 
   private
+
   def multiplier
-    case (moves)
-    when ['punch', 'move left', 'kick']
+    case moves
+    when `%w`['punch', 'move left', 'kick']
       1.5
-    when ['kick', 'punch', 'up']
+    when `%w`['kick', 'punch', 'up']
       2
     else
       1
