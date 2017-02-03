@@ -4,6 +4,7 @@ ruby:
 before_script: 
 - 'bundle install'
 script:
-- 'rspec spec'
+- 'rake nag'
+- 'rake test'
 notifications: 
   email: false
