@@ -1,7 +1,10 @@
 language: ruby
+ruby: 
+- '2.3.1'
 before_script: 
 - 'bundle install'
 script:
-- 'rspec spec'
+- 'rake nag'
+- 'rake test'
 notifications: 
   email: false

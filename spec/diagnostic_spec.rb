@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/diagnostic.rb'
 
 RSpec.describe 'Person' do
@@ -76,7 +78,7 @@ RSpec.describe 'Lion' do
     expect { subject.can_eat_meat? }.not_to raise_error
   end
 
-  it 'has .roar' do
+  it 'has .groom' do
     expect { subject.groom }.not_to raise_error
   end
 
