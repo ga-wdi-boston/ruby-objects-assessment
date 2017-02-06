@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
 ##
 
 ##
@@ -35,7 +45,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("dave", "32", "Ohio")
+dave.update_attribute(:location, Somerville)
 Response.dave = dave
 ##
 
@@ -45,7 +56,12 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+require_relative
+class Developer < Person
+
+Def solve_problems
+  puts "think think think"
+end
 ##
 
 ##
@@ -78,12 +94,16 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# It starts from the bottom and works its way up. So in HouseCat it finds the sound meow
+# but it doesnt find hello, so it moves up. In the next space up it sees cat and groom,
+# but doesnt see anything else, so it moves up a levels and finds say_hello. This calls
+# the class HouseCat and the sound instance becuase it was defined in there and it doesn't
+# have to continue up the chain to get its answer.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +125,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+def initialize
+@roar = 'ROAR!'
+end
 ##
 
 # #
@@ -113,7 +138,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# mixins can be used on multiple classes, without the class inherting everything
+# from the previous class. You can use one part of a mixin if you wanted, you don't
+# to include all of it.
 ##
 
 ##
