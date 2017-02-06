@@ -93,10 +93,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# say_hello returns "I am a <class name>, and I go '<sound>'", and for the HouseCat,
+# the HouseCat is the class name, and sound is defined as 'meow' in the original class,
+# so we don't need to look at any of the parent classes to find the method.
 ##
 
 ##
@@ -120,7 +122,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -128,7 +135,11 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Using composition like mixins let us creat use methods that can be used
+# across classes that may not be related/wouldn't inherit from each other.
+# for example, if we have the module Carnivorous we can include it for the class Cat
+# but also include it for, like, a Venus Fly Trap class even though a Venus Fly Trap
+# isn't a cat or even an animal, but Carnivorous still applies
 ##
 
 ##
@@ -147,17 +158,17 @@ class ComboAttack
     @damage = 0
   end
 
-  def punch
-    @moves << 'punch'
+  def self.punch
+    moves << 'punch'
     @damage += 5
     @damage *= multiplier
   end
 
-  def move(direction)
+  def self.move(direction)
     @moves << "move #{direction}"
   end
 
-  def kick
+  def self.kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
