@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -78,12 +92,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+#  I expect this to be the output because say_hello isn't defined on HouseCat or Cat, so it moves up to Animal looking for the method.
+#  Since HouseCat.new.class.name is "HouseCat", that is what will print in the first argument, and since @sound in HouseCat is 'meow', that is
+#  what will be printed in the second argument.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +121,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +135,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# An advantage of using compsosition is that you can use it when you only want to define behavior and not attributes.
+# There is no need to define a new class and create instances of it when you can include a module.
 ##
 
 ##
@@ -136,25 +159,32 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    'kick, move, punch'
   end
 
   private
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w(punch move left kick)
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w(kick punch up)
       2
     else
       1
