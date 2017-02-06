@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :name :location
+  attr_accessor :age
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,8 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new("Dave", 32, "Ohio")
+:location.dave = Somerville
 ##
 
 ##
@@ -45,7 +54,12 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+
+class Developer < Person
+    def solve_problems
+      puts 'think think think'
+    end
+end
 ##
 
 ##
@@ -78,11 +92,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCar, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
+# ## The class housecat inherits from the class Cat, which inherits from the class Animal.
+# The class Animal includes the method say_hello which returns the string to the above question
+# The method lookup tame goes from Housecat to Cat to Animal until it finds the method say_hello
+# and then returns the string above.
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -105,7 +122,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
+end
 ##
 
 # #
@@ -113,8 +136,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
-##
+# # Using mixins allows you to include some methods when creating a new class that is similar or behaves in the
+# the same way as another class but is not strictly identical and therefore shouldn't be treated as such
+#
 
 ##
 # Fix the 'ComboAttack' class below so that calling
@@ -139,6 +163,7 @@ class ComboAttack
   end
 
   def move(direction)
+    @direction = direction
     @moves << "move #{direction}"
   end
 
@@ -147,6 +172,10 @@ class ComboAttack
     @damage += 10
     @damage *= multiplier
   end
+
+def get_possible_moves
+  puts "kick, move, punch"
+end
 
   private
 
