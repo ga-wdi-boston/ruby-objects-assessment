@@ -151,7 +151,7 @@ end
 
 # ComboAttack Class definition
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
@@ -159,17 +159,17 @@ class ComboAttack
   end
 
   def self.punch
-    moves << 'punch'
+    @moves = @moves.push('punch')
     @damage += 5
     @damage *= multiplier
   end
 
   def self.move(direction)
-    @moves << "move #{direction}"
+    @moves = @moves.push("move #{direction}")
   end
 
   def self.kick
-    @moves << 'kick'
+    @moves = @moves.push('kick')
     @damage += 10
     @damage *= multiplier
   end
