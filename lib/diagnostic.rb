@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +45,9 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location="Somerville"
+
 Response.dave = dave
 ##
 
@@ -45,7 +57,16 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+
+  def initialize
+    @solve_problems = solve_problems
+  end
+
+  def solve_problems
+    puts "think think think"
+  end
+end
 ##
 
 ##
@@ -78,12 +99,13 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go 'meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# This creates a new HouseCat, since it inherits from Cat which inherits from Animal,
+# it will put "I am a #{self.class.name}, and I go '#{@sound}'"
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +127,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +140,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Mixins can make the process quicker than having to define attributes multiple times for different classes
+# You can define multiple classes and then pick and chose which one will inherit attributes from some classes
+# but not others and then also use mixins for the same reason
 ##
 
 ##
@@ -126,6 +155,7 @@ end
 # ComboAttack Class definition
 class ComboAttack
   attr_reader :moves, :damage
+  attr_writer :moves, :damage
 
   def initialize
     @moves = []
@@ -152,9 +182,9 @@ class ComboAttack
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w['punch', 'move left', 'kick']
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w['kick', 'punch', 'up']
       2
     else
       1
