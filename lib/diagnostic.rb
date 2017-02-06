@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_accessor :name, :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
 ##
 
 ##
@@ -35,8 +45,10 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, Ohio)
+
 Response.dave = dave
+
 ##
 
 ##
@@ -45,7 +57,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -78,12 +94,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+The self in the say_hello method refers to the class name which is "HouseCat" and the sound looks into housecat to see the noise so it gets replaced with 'meow'
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +121,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+end
+
+  def roar
+    puts "ROAR!"
+  end
 ##
 
 # #
@@ -113,7 +135,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+You dont have to define new methods for new classes
 ##
 
 ##
