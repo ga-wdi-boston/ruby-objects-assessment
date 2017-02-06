@@ -26,7 +26,11 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+Class Person
+attr_accessor :name
+attr_reader :age
+attr_writer :location
+
 ##
 
 ##
@@ -35,8 +39,9 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new('Dave', 32, 'Ohio')
+@location = 'Somerville'
+Response.dave = Person.dave
 ##
 
 ##
@@ -45,7 +50,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+Class Developer < Person
+def solve_problems
+  'think think think'
+end
+
 ##
 
 ##
@@ -78,10 +87,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# This is the output because HouseCat < Cat && Cat < Animal. Animal has the
+# 'say_hello' method and Class HouseCat has both sound name and a class name to
+# be used.
 ##
 
 ##
@@ -105,7 +116,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+Class Lion < Cat
+include Carnivorous
+
+def roar
+  p 'ROAR!'
+end
+
 ##
 
 # #
@@ -113,7 +130,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+They reduce the amount of redundant code.
 ##
 
 ##
