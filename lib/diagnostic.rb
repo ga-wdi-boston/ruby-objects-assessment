@@ -26,7 +26,22 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+
+# Person class
+class Person
+  # Readers and writers
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    # Instance variables
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
 ##
 
 ##
@@ -35,7 +50,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = "Somerville"
 Response.dave = dave
 ##
 
@@ -45,7 +61,12 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+
+  def solve_problems
+    think = "think think think"
+  end
+end
 ##
 
 ##
@@ -78,12 +99,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# HouseCat inherits from Cat which inherits from Animal, which makes sense.
+# The initialization of a new HouseCat overrides the initialize method from
+# Animal by changing the instance variable @sound to 'meow' instead of nil.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -104,8 +127,15 @@ module Carnivorous
   end
 end
 
-##
-# your response here
+## Lion class inherits from Cat class
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+
+end
 ##
 
 # #
@@ -113,7 +143,10 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Two things that may have similar behavior may not nececssarily inherit from
+# each other. Computers and humans sleep but neither inherits from the other.
+# It would make no sense to put Computer < Human or Human < Computer. instead
+# We make a mixin called Sleepable or something and use that.
 ##
 
 ##
@@ -125,7 +158,7 @@ end
 
 # ComboAttack Class definition
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
@@ -136,16 +169,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    "kick, move, punch"
   end
 
   private
