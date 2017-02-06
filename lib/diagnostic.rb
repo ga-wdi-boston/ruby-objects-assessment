@@ -28,6 +28,16 @@ Response = OpenStruct.new
 ##
 # your response here
 ##
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+def initialize
+  @name = name
+  @age = age
+  @location = locatin
+end
+end
 
 ##
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -35,8 +45,10 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new ('Dave', '32', 'Ohio')
+
+
+Response.dave = { 'Dave => Ohio'}
 ##
 
 ##
@@ -45,7 +57,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+def initialize(solve_problems)
+    @solve_problems = "think think think"
+  end
+end
 ##
 
 ##
@@ -78,12 +94,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise =
+
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+NameError: uninitialized constant Response
+because "noise" was never initialized
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +123,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+include Carnivorous
+def initialize (roar)
+  @roar = "ROAR!"
+end
+end
+
 ##
 
 # #
@@ -113,7 +137,11 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+inheritance is used for "is-a " situations and mixins
+are ued for "behaves-as" functions
+so the advantages of using mixins is tht you can change some of the
+attributes that do not fit srtictly with the parent
+
 ##
 
 ##
@@ -139,7 +167,7 @@ class ComboAttack
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    @moves << "move #{'left', 'right', 'up', 'down'}"
   end
 
   def kick
@@ -161,3 +189,5 @@ class ComboAttack
     end
   end
 end
+def get_possible_moves
+    ComboAttack.select { |moves|  }
