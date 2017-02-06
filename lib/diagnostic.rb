@@ -26,26 +26,36 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :name, :age
+  attr_writer :name, :location
+end
 ##
 
 ##
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
 # Then, in the next line, change this Person's location property to
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
-
+def initialize (Dave,32, Ohio)
+ @location = Somerville
+ @name = Dave
+ @age = 32
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new
 Response.dave = dave
 ##
-
+end
 ##
 # Create another class called Developer that inherits from Person.
 # Give it a new instance method called 'solve_problems',
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def instance
+    @solve_problems = "think think think"
+  end
+end
 ##
 
 ##
@@ -82,12 +92,20 @@ Response.housecat_noise = nil
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
+HouseCat is refering to a Cat class, Cat class is refering to Animal - animal has the sound nil.
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
+class Lion < Cat
+ include Carnivorous
+
+   def road
+     puts "ROAR!"
+   end
+end
+
 
 # Carnivorous module definition
 module Carnivorous
