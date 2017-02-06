@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +45,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +56,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  DEV = Person.new(solve_problems: 'think think think')
+  puts Person.solve_problems
+end
+
 ##
 
 ##
@@ -78,16 +93,23 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go 'meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# HouseCat points to Cat which points to Animal which prints the sentence which gets the HouseCat name and teh HouseCat sound
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
+
+class Lion < Cat
+  def initialize
+    @roar = roar
+    puts "ROAR!"
+  end
+end
 
 # Carnivorous module definition
 module Carnivorous
@@ -113,7 +135,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# They keep things DRY by allowing you to share behavior over multiple classes
 ##
 
 ##
