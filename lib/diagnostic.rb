@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+
+  def instantiate(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +45,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', '32', 'Ohio')
+dave[2] = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +56,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -78,11 +93,11 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I'm a HouseCat and I got 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
+## because HouseCat inherits from Cat, Cat inherits from Animal, it keeps going up the supers to look for that method.
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -105,7 +120,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -113,7 +134,10 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# mixins are more of behaviors, whereas if something has direct inheritance,
+# then it 'is' that which it inherits to. with vice versa it 'has' like a the red line has a station.
+# Also, we want to keep things seperate. The more independent things are the better so
+# as not to have to change a lot of code when making modifications.
 ##
 
 ##
