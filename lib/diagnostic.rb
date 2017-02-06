@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -78,12 +92,13 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# HouseCat ninherits 'say_hello' from the Animal class.  #{self.class.name} refers the the class HouseCat.
+# #{@sound} is assigned in the HouseCat class
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +120,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    p "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +133,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Mixins can be included for particular classes, and you can select what mixins
+# you want and don't want.  Inheritence is less selective, everything one class has is given to the inheriting class.
 ##
 
 ##
