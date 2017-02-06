@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    return "think think think"
+  end
+end
 ##
 
 ##
@@ -78,12 +92,15 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# When we call say_hello the lookup chain goes from HouseCat to Cat to Animal
+# before it finds a response.  It then takes that command back to HouseCat,
+# which defines both self (HouseCat) and sound (meow), which it fills in and puts.
+# (added #'s because I was annoyed by atom coloring my response when I used words that are code')
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +122,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +135,11 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# A lot of this seems semantic to me: while you can get the same behavior
+# using either method, the idea of classes in Ruby is to group like things.
+# Very different things can have the same behaviors, and therefore it's better
+# to group them as a mixin or composition rather than as a class so that only
+# the needed behavior gets passed down to the new classes.
 ##
 
 ##
@@ -133,19 +159,23 @@ class ComboAttack
   end
 
   def punch
-    @moves << 'punch'
-    @damage += 5
-    @damage *= multiplier
+    self.moves << 'punch'
+    self.damage += 5
+    self.damage *= multiplier
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    self.moves << "move #{direction}"
   end
 
   def kick
-    @moves << 'kick'
-    @damage += 10
-    @damage *= multiplier
+    self.moves << 'kick'
+    self.damage += 10
+    self.damage *= multiplier
+  end
+
+  def get_possible_moves
+    return "kick, move, punch"
   end
 
   private
