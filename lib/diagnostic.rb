@@ -26,7 +26,13 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+
+# I need a bit more time. I am not sure about some of the syntax and did not have time to look it up
+class Person
+ attr_accessor: name
+ attr_reader: age
+ attr_writer: location
+end
 ##
 
 ##
@@ -36,7 +42,9 @@ Response = OpenStruct.new
 
 ## replace nil with your response, then continue your work on the next line
 dave = nil
-Response.dave = dave
+Response.dave = dave.create(:name => "Dave", :age => 32, location => "Ohio")
+dave.location => "Somerville"
+dave = Person.new
 ##
 
 ##
@@ -45,7 +53,7 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+
 ##
 
 ##
@@ -78,12 +86,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a Animal and I go nil"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+#House inherits from cat, which inherits from animal, so the inheritance comes directly from the superclass, which is not exactly what this reponse wants to be doing I think. A mxin would have been better.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -104,8 +112,15 @@ module Carnivorous
   end
 end
 
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
-# your response here
+
 ##
 
 # #
@@ -113,7 +128,10 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Mix-ins solve the problem of a class not being able to inherit multiple
+#superclasses. That is the main advantage it has over inheritance and their roles are ultimately
+#very similair.
+
 ##
 
 ##
@@ -161,3 +179,5 @@ class ComboAttack
     end
   end
 end
+
+class get_possible_moves
