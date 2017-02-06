@@ -159,19 +159,19 @@ class ComboAttack
   end
 
   def punch
-    @moves << 'punch'
-    @damage += 5
-    @damage *= multiplier
+    self.moves << 'punch'
+    self.damage += 5
+    self.damage *= multiplier
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    self.moves << "move #{direction}"
   end
 
   def kick
-    @moves << 'kick'
-    @damage += 10
-    @damage *= multiplier
+    self.moves << 'kick'
+    self.damage += 10
+    self.damage *= multiplier
   end
 
   def get_possible_moves
