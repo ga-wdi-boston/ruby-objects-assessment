@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +45,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
 Response.dave = dave
 ##
 
@@ -45,7 +56,13 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+
+class Developer < Person
+  def solve_problems
+    "think think think"
+  end
+end
+
 ##
 
 ##
@@ -78,12 +95,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# Ruby first creates a new instance of the class Housecat.  After, it looks for say_hello in Housecat and does not find it.
+# Then, it looks of say hello in the class Cat and does not find it.  Then, it looks to Animal and sees that say_hello is
+# defined.  It uses the self keyword in terms of the class name (being housecat) and looks for the attribute "@sound" which is
+# defined under the class HouseCat.
 ##
-
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +124,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +138,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Mixins are used when things "behave as" rather than "is a" part of.
 ##
 
 ##
@@ -125,7 +150,7 @@ end
 
 # ComboAttack Class definition
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
@@ -147,8 +172,6 @@ class ComboAttack
     @damage += 10
     @damage *= multiplier
   end
-
-  private
 
   def multiplier
     case moves
