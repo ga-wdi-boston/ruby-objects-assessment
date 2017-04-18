@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -78,13 +92,20 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+#The class Animal creates the method say_hello. It uses the string provided and
+ # then tells Ruby to insert the name of the particular class that calls it a
+ # insert the sound. The class Housecat inherits from Cat which inherits from Animal.
+ # As a result, housecase has access to the say_hello method. The def initialize
+ # method in Housecat overwrites the one in animal and sets sound to be 'meow'. As
+ # a result, when this is called, the closest class Housecat will be used in the string
+ # along with the sound set by Housecat.
 ##
+
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
@@ -105,12 +126,24 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    print 'ROAR!'
+  end
+end
 ##
 
 # #
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
+
+# It allows your code to inherit functionality from multiple modules rather than
+# just a parent class. With inheritance, I believe you can only inherit through
+# the single chain of class. However, with mixins, you can pull whatever
+# functionality you like into a class from multiple modules without having to
+# ensure the correct inheritance path. It jus gives you more flexibility.
 
 ##
 # your response as a comment here
