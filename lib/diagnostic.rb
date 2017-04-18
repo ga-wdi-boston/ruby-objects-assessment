@@ -26,8 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
-##
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer:location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+  ##
 
 ##
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -35,7 +43,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
 Response.dave = dave
 ##
 
@@ -45,8 +54,10 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
-##
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end##
 
 ##
 # Study the code below before responding.
@@ -78,11 +89,11 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go meow
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
-##
+The housecat class inherits from both cat and animal, so it would inherit
+the say_hello method, which returns the string and meow since it is passed down. ##
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -105,7 +116,11 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +128,13 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+Inheritance should only be used when:
+
+Both classes are in the same logical domain
+The subclass is a proper subtype of the superclass
+The superclass’s implementation is necessary or appropriate for the subclass
+The enhancements made by the subclass are primarily additive.
+^google helped me out on this one
 ##
 
 ##
