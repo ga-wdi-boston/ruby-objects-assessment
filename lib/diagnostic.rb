@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_writer :location
+  attr_accessor :name
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +44,7 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
 Response.dave = dave
 ##
 
@@ -45,7 +54,14 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
+
+dev = Developer.new('Test', 3333, 'GA')
+
 ##
 
 ##
@@ -78,10 +94,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a HouseCat and I go meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
+# The slef.class.name is going to refer to the class name used when calling the
+# function whihc was HouseCat.  If we had done Cat.new.say_hello it would have been I am a Cat.
+# The sound is meow b/c that is defined in HouseCat, and HouseCat has access to the say_hello
+# method b/c it's grandparent?? is animal which has the method built into it.
 ##
 
 ##
@@ -95,6 +115,10 @@ module Carnivorous
     true
   end
 
+  def roar
+    p 'ROAR!'
+  end
+
   def eat_meat(food)
     if food.class == 'Animal'
       puts "NOM NOM NOM. #{food.class} is delicious"
@@ -103,7 +127,12 @@ module Carnivorous
     end
   end
 end
+# I'm making a lion
+class Lion < Cat
+  include Carnivorous
+end
 
+Lion.new.roar
 ##
 # your response here
 ##
@@ -113,7 +142,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Lets say I start to include Dogs, there are some carnevours dogs adn I could add
+# this mix in to appropriate dog classes as well.  Probably none since I put Roar in that module.
 ##
 
 ##
@@ -136,16 +166,19 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
