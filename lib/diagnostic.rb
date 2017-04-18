@@ -26,7 +26,19 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+  @name = name
+  @age = age
+  @location = location
+  end
+
+end
+
 ##
 
 ##
@@ -35,7 +47,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +58,12 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+
+end
 ##
 
 ##
@@ -78,16 +96,19 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a house cat and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
+## HouseCat is a child class of Cat which is a child class of Animal. When a new house cat is initialized, the code looks to see if there is a say hello on HouseCat, there is not so it looks up the chain to cat, the say_hello isn't there either so the code looks up further to the animal class where it finds the say_hello method.
+
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
+
+
 
 # Carnivorous module definition
 module Carnivorous
@@ -105,15 +126,20 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  import Carnivorous
+
+ def roar
+   puts 'ROAR'
+ end
+end
 ##
 
 # #
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
 
-##
-# your response as a comment here
+##If you have multiple classes that may use the same methods, you can create a module and import it into the neccessary classes versus having to write out the methods in each class.
 ##
 
 ##
