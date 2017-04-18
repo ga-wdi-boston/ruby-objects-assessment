@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :name, :age
+  attr_writer :name, :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -78,11 +92,19 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
+HouseCat.new creates a new instance of HouseCat and initializes the @sound
+variable to the string 'meow'.  It then tries to find the 'say_hello' instance
+method and it doesn't find it in the HouseCat class.  The HouseCat class
+inherits from the Cat class and it doesn't find the 'say_hello' instance method
+in that Cat class either.  The Cat class inherits from the Animal class and it
+DOES find the 'say_hello' instance method there.  The 'say_hello' instance method
+is executed on the HouseCat instance printing out the above output replacing
+@sound with 'meow'.
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -105,7 +127,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +140,11 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+The advantage of using a mixin over single inheritance is that you can write
+code for the functionality one time (in a module), and then use the same
+functionality in multiple different classes.  A class can include multiple
+mixin modules but a class can only include one class through direct inheritance.
+
 ##
 
 ##
@@ -136,16 +167,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def self.get_possible_moves
+    'kick, move, punch'
   end
 
   private
