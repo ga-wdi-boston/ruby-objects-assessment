@@ -26,7 +26,21 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+require 'pry'
+attr_accessor :name
+attr_reader :age
+attr_writer :location
+
+
+class Person
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
+end
+
 ##
 
 ##
@@ -35,7 +49,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Sommerville"
 Response.dave = dave
 ##
 
@@ -45,7 +60,19 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+require 'pry'
+attr_accessor :name
+attr_reader :age
+attr_writer :location
+
+
+class Developer < Person
+
+  def solve_problems
+    return "think think think"
+  end
+
+end
 ##
 
 ##
@@ -78,11 +105,17 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go 'meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
+Housecat inherits from Cat who inherits from Animal. So in that inheritance
+chain the sa_helo method is invoked in the Animal grand parent class.
+By using 'self' in that say_hello method shain it is referring to the
+object context of house cat and hence why it says self.class.name is the
+housecat. As for the @sound, it is just an attribute on the Housecat class
+that is initialized when the cat is instantiated.
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -105,7 +138,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion <  Cat
+  includes Carnivorous
+  def roar
+  returns "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +151,15 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+Composition is fairly easy to understand - we can see composition
+ in everyday life: a chair has legs, a wall is composed of bricks and mortar,
+ and so on. While the definition of inheritance is simple, it
+ can become a complicated, tangled thing when used unwisely.
+ Inheritance is more of an abstraction that we can only talk
+ about, not touch directly. Though it is possible to mimic
+ inheritance using composition in many situations, it is often
+  unwieldy to do so. The purpose of composition is obvious: make
+    wholes out of parts.
 ##
 
 ##
@@ -122,6 +168,8 @@ end
 #
 # Then, create a new class method called "get_possible_moves",
 # which returns the string "kick, move, punch"
+
+NO TIME LEFT TO DO THIS QUESTION!!
 
 # ComboAttack Class definition
 class ComboAttack
