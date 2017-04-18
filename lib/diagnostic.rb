@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+Class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave[:location] = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +55,10 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+Class Developer < Person
+def solve_problems
+  p 'think think think'
+end
 ##
 
 ##
@@ -78,11 +91,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go 'meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
+## This is the output because the Housecat instances have access to the Animals methods because of inheritance from Cat and then from Animal. self.class.name calls on the housecat class and sound is a instance method for housecat
+
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -105,7 +119,11 @@ module Carnivorous
 end
 
 ##
-# your response here
+Class Lion < Cat
+  include Carnivorous
+  def roar
+    p 'ROAR!'
+  end
 ##
 
 # #
@@ -113,7 +131,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+It allows you to have multiple inheritance classes from two seperate classes that might
+not be related to one another intuitivly.
 ##
 
 ##
@@ -136,25 +155,28 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w['punch', 'move left', 'kick']
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w['kick', 'punch', 'up']
       2
     else
       1
