@@ -26,7 +26,18 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer: location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
+
 ##
 
 ##
@@ -35,8 +46,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new(name: "Dave", age: 32, location: "Ohio")
+Response.dave.location = "Somerville"
 ##
 
 ##
@@ -45,7 +56,13 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def initialize(name, age, location)
+  end
+  def solve_problems
+    puts "think think think"
+  end
+end
 ##
 
 ##
@@ -78,11 +95,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go 'meow'.
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
-##
+say_hello puts I am a xx and I go xx
+the first {} equates to the self class name of HouseCat and the second {} is
+the sound that the housecat makes.##
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -105,7 +123,14 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  def initialize
+  end
+  #ADD MIXIN HERE - RAN OUT OF TIME
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
