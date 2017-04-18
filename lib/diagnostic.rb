@@ -26,7 +26,29 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :name, :age
+  attr_writer :name, :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
+  def name
+    @name
+  end
+
+  def age
+    @age
+  end
+
+  def location=(location)
+    @surname = surname
+  end
+end
+
 ##
 
 ##
@@ -35,7 +57,7 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
 Response.dave = dave
 ##
 
@@ -45,7 +67,20 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def initialize(name, age, location)
+    super(name, age, location)
+  end
+
+  def solve_problems
+    puts string = 'think think think'
+  end
+end
+
+# define Class Ford
+class Ford
+end
+
 ##
 
 ##
@@ -78,10 +113,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# Working from right in, say_hello method is available to HouseCat because
+# it is a child class, but the proximate @sound is most local, for HouseCat.
+# Since HouseCat is a child of Cat, and animal, it inherits the method and uses
+# the specific @sound associated with HouseCat.  The say_hello method
+# is called using the object HouseCat and the @sound 'meow'
 ##
 
 ##
@@ -105,7 +144,10 @@ module Carnivorous
 end
 
 ##
-# your response here
+require_relative 'Cat'
+require_relative 'Carnivorous'
+class Lion < Carnivorous
+  def
 ##
 
 # #
