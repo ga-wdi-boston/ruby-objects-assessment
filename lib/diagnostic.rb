@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_accessor :name
+  attr_writer :location
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+location.dave = 'Somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    return 'think think think'
+  end
+end
 ##
 
 ##
@@ -78,10 +92,10 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+class_name is Housecat and sounds is meow.   That gets plugged into metod say_hello.
 ##
 
 ##
@@ -102,10 +116,14 @@ module Carnivorous
       puts 'Yuck!'
     end
   end
-end
 
 ##
-# your response here
+class Lion
+  include Carnivorous
+  def roar
+    p 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -113,7 +131,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+Mixins are used when the class including it shares only a minor attribute.
+For example people and computer both sleep but otherwise they share no other
+simlarities.
 ##
 
 ##
@@ -142,7 +162,7 @@ class ComboAttack
     @moves << "move #{direction}"
   end
 
-  def kick
+  def kick(damage)
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
@@ -159,5 +179,8 @@ class ComboAttack
     else
       1
     end
+  end
+  def get_possible_moves
+    return "kick, move, punch"
   end
 end
