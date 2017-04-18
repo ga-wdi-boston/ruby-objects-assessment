@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name ,age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave" ,32, "Ohio")
+dave.location = "Somerville"
 Response.dave = dave
 ##
 
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+end
 ##
 
 ##
@@ -78,11 +92,16 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
+#The output would be meow and HouseCat because the method lookup chain goes up the chain
+#when it can not find an attribute. For example, it will try to find the say_hello
+# method in HouseCat then Cat then find it in Animal.  It will then try to find the
+# class name and sound in HouseCat since it has values that correspond to it. If sound
+# was not found in HouseCat it would search in Cat etc.
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -105,7 +124,15 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+  puts "ROAR!"
+  end
+end
+
+
+
 ##
 
 # #
@@ -113,7 +140,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# You would use composition when you want you want to add a behavior that may
+# apply to very distinct classes.  This would be helpful in a case where you want
+# to add behavior where inheritance doesn't make sense like a person and cat eating.
 ##
 
 ##
