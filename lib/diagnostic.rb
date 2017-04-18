@@ -57,7 +57,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -90,10 +94,10 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+#The initialize method for HouseCat overrides the initialize method for Animal, where sound is nil.
 ##
 
 ##
@@ -117,7 +121,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -125,7 +135,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# You can include a lot of optional methods from another class without the requirement that the object must be an instance of the class itself.
 ##
 
 ##
@@ -137,39 +147,50 @@ end
 
 # ComboAttack Class definition
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_reader :damage
+  attr_accessor :moves
 
   def initialize
     @moves = []
     @damage = 0
   end
 
+  def self.get_possible_moves
+    'kick, move, punch'
+  end
+
   def punch
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    @damage *= multiplier
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w('punch' 'move left' 'kick')
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w('kick' 'punch' 'up')
       2
     else
       1
     end
   end
 end
+
+ComboAttack.get_possible_moves
