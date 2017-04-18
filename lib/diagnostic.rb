@@ -26,7 +26,11 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+end
 ##
 
 ##
@@ -35,7 +39,19 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(location)
+    @name = 'Dave'
+    @age = 32
+    @location = location
+  end
+end
+
+dave = Person.new('Somerville')
 Response.dave = dave
 ##
 
@@ -45,7 +61,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -78,12 +98,16 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go 'meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
-
+## Since HouseCat inherits from both Cat and Animal,
+## it will inherit the say_hello method. When we create a new
+## instance of the variable, the say_hello method will take the
+## name of the class (in this case, HouseCat) and the sound that
+## was set during initialization (in this case, 'meow'). Then, it
+## will use string interpolation to output the say_hello sentence.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +129,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -114,7 +144,9 @@ end
 
 ##
 # your response as a comment here
-##
+## Mixins are a great way to share functionality between different classes
+## They allow you to reuse code, and easily include functionality into
+## multiple classes.
 
 ##
 # Fix the 'ComboAttack' class below so that calling
@@ -148,16 +180,20 @@ class ComboAttack
     @damage *= multiplier
   end
 
-  private
+  # private
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w['punch', 'left', 'kick']
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w['kick', 'punch', 'up']
       2
     else
       1
     end
+  end
+
+  def get_possible_moves
+    puts "kick, move, punch"
   end
 end
