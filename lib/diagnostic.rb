@@ -184,7 +184,7 @@ class ComboAttack
     end
   end
 
-  def get_possible_moves
+  def self.get_possible_moves
    return 'kick, move, punch'
   end
 
