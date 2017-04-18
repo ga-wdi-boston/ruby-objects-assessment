@@ -26,7 +26,19 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  # name: Matt, age: 29, location: boston
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+
+end
 ##
 
 ##
@@ -35,6 +47,9 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Somerville"
+
 dave = nil
 Response.dave = dave
 ##
@@ -45,7 +60,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    p "think think think"
+  end
+end
 ##
 
 ##
@@ -78,10 +97,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+'Because the HouseCat class inherits the say_hello method from Cat and Animal,
+it can run it. But because the class is HouseCat and not Animal. the self and
+sound references refer to HouseCat, not Animal.'
 ##
 
 ##
@@ -105,7 +126,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    p "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +140,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+'Mixins are better when you have modules that you want to use in many unrelated
+classes.'
 ##
 
 ##
@@ -136,28 +164,34 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w[punch move left kick]
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w[kick punch up]
       2
     else
       1
     end
   end
 end
+
+
+x = ComboAttack.new.punch.move('left').kick.damage
