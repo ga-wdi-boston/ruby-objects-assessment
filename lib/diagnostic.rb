@@ -26,7 +26,18 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
 ##
 
 ##
@@ -35,7 +46,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'somerville'
 Response.dave = dave
 ##
 
@@ -45,7 +57,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -78,10 +94,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# HouseCat.new creates an instance HouseCat, which inherits say_hello from
+# Animal. HouseCat is initialized with sound, 'meow', which is passed to
+# say_hello method.
 ##
 
 ##
@@ -105,7 +123,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    p 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -113,7 +137,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Helps keep things organized when there is an analogue but no direct hierarchy
 ##
 
 ##
@@ -152,9 +176,9 @@ class ComboAttack
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w(punch, move left, kick)
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w(kick, punch, up)
       2
     else
       1
