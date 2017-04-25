@@ -26,7 +26,18 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
 ##
 
 ##
@@ -35,7 +46,7 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
 Response.dave = dave
 ##
 
@@ -45,7 +56,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    'think think think'
+  end
+end
 ##
 
 ##
@@ -78,10 +93,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# The class definition for HouseCat sets the @sound property of the parent
+# class Animal to "meow". Since HouseCat is a descendant of Cat, which is a
+# descendant of Animal, self.class.name of HouseCat would be "HouseCat".
 ##
 
 ##
@@ -105,7 +122,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts 'ROAR!'
+  end
+end
 ##
 
 # #
@@ -113,7 +136,11 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Composition gives the ability to provide specific attributes to a Class
+# defintion, rather than modifying the inheriting class as whole. This
+# modularity of compostion allows mix-ins to provide their specific
+# functionality to Classes of different types, which can be more difficult in
+# inherited classes.
 ##
 
 ##
@@ -125,36 +152,46 @@ end
 
 # ComboAttack Class definition
 class ComboAttack
-  attr_reader :moves, :damage
+  ### NOTE: can't fix Error: Errno::ENOENT: No such file or directory - %w
 
+  attr_accessor :moves, :damage, :punch, :move, :kick, :multiplier
   def initialize
+    puts 'initialize'
     @moves = []
     @damage = 0
+    self
   end
 
   def punch
+    puts 'punch'
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
+    puts 'move'
     @moves << "move #{direction}"
+    self
   end
 
   def kick
+    puts 'kick'
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
 
   def multiplier
+    puts 'multiplier'
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w[punch #{'move '+'left'} kick]
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w[kick punch up]
       2
     else
       1
