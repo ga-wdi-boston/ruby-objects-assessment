@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,8 +45,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new('Dave', 32, 'Ohio')
+Response.dave = dave.location = 'Mass'
 ##
 
 ##
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -78,10 +92,12 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# say_hello method is referring to self.class. In HouseCat's case, HouseCat
+# was the class calling that method and since it was a different class, @sound
+# was not reassingning the value in Animal, but creating a new one.
 ##
 
 ##
@@ -105,7 +121,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < cat
+  EATS = Carnivorous.new
+
+  def roar
+    puts 'ROAR'
+  end
+end
 ##
 
 # #
@@ -113,7 +135,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# mixins can be more specific then inhritance. Also, if you keep nesting
+# inheritances, it gets very difficult to track the parents, once your code
+# starts growing.
 ##
 
 ##
