@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_reader :age
+  attr_accessor :name, :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
+
 ##
 
 ##
@@ -35,7 +45,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+dave.location = "Sommerville"
 Response.dave = dave
 ##
 
@@ -45,7 +56,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    p "think, think, think"
+  end
+end
 ##
 
 ##
@@ -78,17 +93,17 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I'm a housecat and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
-##
 
-##
+## Houscat looks at cat which looks at animal which has the say hello method. Cat
+##has its own sound initialize function so that superscedes the nil value of the animal sound.
+
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
-
 # Carnivorous module definition
 module Carnivorous
   def can_eat_meat?
@@ -105,7 +120,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < cat
+  include Carnivorous
+  def roar
+    p "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +133,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Composition allows you to include functions that are simliar in objects that are
+# not neccessarily related.
 ##
 
 ##
