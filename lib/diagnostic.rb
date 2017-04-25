@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +44,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave',32,'Ohio')
+dave.location = "Somerville"
 Response.dave = dave
 ##
 
@@ -45,7 +55,14 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def initialize (name, age, location)
+    super
+  end
+  def solve_problems
+    return "think think think"
+  end
+end
 ##
 
 ##
@@ -78,16 +95,17 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# HouseCat.new.say_hello - this will look for say_hello in HouseCat.  Doesn't find it so it goes to Cat. Doesn't find it, so it goes to animal.  Animal has the say_hello method which is an instance method.  That means that the self is referring to the instance, which is HouseCat.  The sound for HouseCat is meow.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
+
 
 # Carnivorous module definition
 module Carnivorous
@@ -105,7 +123,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    print "ROAR!\n"
+  end
+end
 ##
 
 # #
