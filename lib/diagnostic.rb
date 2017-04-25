@@ -124,7 +124,14 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def say_roar
+    puts "ROAR!"
+  end
+end
+
 ##
 
 # #
@@ -132,7 +139,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+"An advantage of composition is that you can use it to reference only part of the module that you want to use, rather than having to inhreite the entire class if you only want to use one or two methods from it."
 ##
 
 ##
@@ -158,25 +165,29 @@ class ComboAttack
   end
 
   def move(direction)
-    @moves << "move #{direction}"
+    self.moves << "move #{direction}"
   end
 
   def kick
-    @moves << 'kick'
-    @damage += 10
-    @damage *= multiplier
+    self.moves << 'kick'
+    self.damage += 10
+    self.damage *= multiplier
   end
 
   private
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when [%w(punch, move left, kick)]
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when [%w(kick, punch, up)]
       2
     else
       1
     end
   end
 end
+
+ puts ComboAttack.new.punch
+
+ # .punch.move('left').kick.damage
