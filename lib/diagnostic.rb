@@ -26,8 +26,14 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
-##
+class Person
+attr_accessor :name
+attr_reader :age
+attr_writer :location
+  initialize (name, age, location)
+    @name = name
+    @age = age
+    @location = location##
 
 ##
 # Instatiate a new Person object using arguments "Dave", 32, and "Ohio".
@@ -35,8 +41,10 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+
+dave = Person.new("dave", 32, "Ohio")
+location.Dave("Somerville")
+Response.dave = Person.Dave
 ##
 
 ##
@@ -45,8 +53,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
-##
+Class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+  ##
 
 ##
 # Study the code below before responding.
@@ -78,12 +89,13 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat and I go meow"
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# 'say_hello' refers back to the HouseCat.new instance, where the #{sound}
+#       has been defined as 'meow' within HouseCat.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,7 +117,11 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
 ##
 
 # #
@@ -113,9 +129,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
-##
-
+# composition can simplify and clarify which attributes belong to which objects,
+# removing the possibility for errors and making sure
+# that the inheritance works as intended##
 ##
 # Fix the 'ComboAttack' class below so that calling
 # `ComboAttack.new.punch.move('left').kick.damage` doesn't cause an error.
