@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location - location
+  end
+end
 ##
 
 ##
@@ -35,8 +44,9 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = Person.new("Dave", 32, "Ohio")
+dave = Person.location ("Ohio")
+Response.dave = dave.person.update(location: "Ohio")
 ##
 
 ##
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts 'think think think'
+  end
+end
 ##
 
 ##
@@ -78,11 +92,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a HouseCat and I go meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
+
+## The HouseCat class inherits from the other classes and thus has access to the method say_hello and uses its @sound in that method.
+
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
@@ -90,6 +107,15 @@ Response.housecat_noise = nil
 # (c) adds a new method called `roar`, which prints out "ROAR!"
 
 # Carnivorous module definition
+
+class Lion < Cat
+  def initialize
+    @food = 'Animal'
+  end
+  def ROAR
+    puts "ROAR!"
+  end
+
 module Carnivorous
   def can_eat_meat?
     true
@@ -113,7 +139,9 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Organization and logical placement of code. If other classes aren't going to use the method/property
+#then it doesn't make sense to provide it to everything. It also keeps your classes from having tons of random stuff only
+#some of its children use, and making your class hard to understand.
 ##
 
 ##
@@ -136,16 +164,23 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
+  end
+
+  def get_possible_moves
+    puts "#{kick}, #{move}, #{punch}"
   end
 
   private
@@ -160,4 +195,5 @@ class ComboAttack
       1
     end
   end
+end
 end
