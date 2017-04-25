@@ -162,16 +162,19 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
-    self.moves << "move #{direction}"
+    @moves << "move #{direction}"
+    self
   end
 
   def kick
     self.moves << 'kick'
     self.damage += 10
     self.damage *= multiplier
+    self
   end
 
   private
@@ -188,6 +191,6 @@ class ComboAttack
   end
 end
 
- puts ComboAttack.new.punch
+ puts ComboAttack.new.punch.move('left').kick
 
  # .punch.move('left').kick.damage
