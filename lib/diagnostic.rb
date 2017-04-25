@@ -97,9 +97,9 @@ Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-Because HouseCat inherits Cat, which inherits Animal, self.class.name in the
-say_hello method refers to HouseCat. HouseCat inherits @sounds instance variable
-as well, but it overrides it with its own method of @sounds.
+# Because HouseCat inherits Cat, which inherits Animal, self.class.name in the
+# say_hello method refers to HouseCat. HouseCat inherits @sounds instance variable
+# as well, but it overrides it with its own method of @sounds.
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -121,7 +121,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+
+  def roar
+    puts "ROAR"
+  end
+end
 ##
 
 # #
@@ -129,7 +135,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Using mixins is more popular than inheritance because you don’t have to think
+# about the relationship between classes.
 ##
 
 ##
@@ -141,7 +148,7 @@ end
 
 # ComboAttack Class definition
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
@@ -152,16 +159,19 @@ class ComboAttack
     @moves << 'punch'
     @damage += 5
     @damage *= multiplier
+    self
   end
 
   def move(direction)
     @moves << "move #{direction}"
+    self
   end
 
   def kick
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
+    self
   end
 
   private
@@ -175,5 +185,11 @@ class ComboAttack
     else
       1
     end
+    self
   end
+
+  def get_possible_moves
+    puts "kick, move, punch"
+  end
+
 end
