@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+#
+class Person
+  attr_reader :name
+  attr_reader :age
+  attr_reader :location
+    def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+  end
 ##
 
 ##
@@ -35,7 +45,13 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+
+# dave = Hash.new
+dave = Person.new
+# dave = Hash.new('')
+dave = Person.new('')
+dave = {name: "Dave", age: 32, location: "Ohio"}
+
 Response.dave = dave
 ##
 
@@ -45,7 +61,12 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+#
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+end
 ##
 
 ##
@@ -83,7 +104,7 @@ Response.housecat_noise = nil
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
 ##
-
+# Not finished
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
@@ -105,9 +126,17 @@ module Carnivorous
 end
 
 ##
-# your response here
-##
+class Cat
 
+end
+
+class Lion < Cat
+  def roar
+    puts 'ROAR!'
+  end
+end
+##
+#Not finished
 # #
 # What are some of the advantages of using composition (i.e. mixins)
 # over using direct inheritance?
