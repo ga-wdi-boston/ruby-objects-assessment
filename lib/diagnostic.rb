@@ -26,7 +26,18 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
+
 ##
 
 ##
@@ -35,7 +46,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new('Dave', 32, 'Ohio')
+dave.location = 'Sommerville'
 Response.dave = dave
 ##
 
@@ -45,7 +57,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    p "think think think"
+  end
+end
 ##
 
 ##
@@ -78,10 +94,13 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+HouseCat.new.say_hello = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# the say_hello method is defined in the animal superclass, meaning that the cat object
+# has access to its inbuilt say hello method. This access is passed on to HouseCat. As
+# sound is not defined until HouseCat and the name HouseCat overwrites the name cat,
+# the string interpolation places the most recent variables in its string
 ##
 
 ##
@@ -105,7 +124,16 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def initialize
+    @sound = 'ROAR'
+  end
+  def roar
+    puts "#{@sound}"
+  end
+end
+
 ##
 
 # #
@@ -113,7 +141,11 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# Mixins allow for greater flexibility, and are useful for replicating behaviors which
+# may exist across objects that are otherwise unrelated to each other. The best example
+# of this is how both a person and a computer can sleep. The objects are not related,
+# so it makes little sense to use inheritance, but they do share a behavior which can
+# be shared using a mixin.
 ##
 
 ##
@@ -159,5 +191,9 @@ class ComboAttack
     else
       1
     end
+  end
+
+  def self.get_possible_moves
+    p 'kick, move punch'
   end
 end
