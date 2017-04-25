@@ -26,7 +26,23 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+Class Person
+def Initialize
+
+def name
+  @name
+end
+end
+
+def age
+  @age
+end
+end
+
+def location
+  @location
+end
+end
 ##
 
 ##
@@ -45,7 +61,12 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+def Developer
+  @Developer
+  def self.solve_problems
+    puts "think think think"
+  end
+end
 ##
 
 ##
@@ -78,17 +99,17 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = 'I am a HouseCat and I go meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+# Because sound has been defined in HouseCat and self takes form the HouseCat class.
+# say_hello in defined in animal class.
 ##
 
 ##
 # Define a new class, 'Lion', which (a) inherits from 'Cat',
 # (b) uses the 'Carnivorous' module below as a mixin, and
 # (c) adds a new method called `roar`, which prints out "ROAR!"
-
 # Carnivorous module definition
 module Carnivorous
   def can_eat_meat?
@@ -105,7 +126,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+Class Lion < Cat
+include Carnivorous
+  def roar
+    puts 'ROAR!'
+  end
+end
+end
 ##
 
 # #
@@ -113,7 +140,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# mixins can be used in each instance they are required rather than taking form the parent class.
 ##
 
 ##
