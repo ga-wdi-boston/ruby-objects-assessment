@@ -26,7 +26,15 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def initialize(name, age, location)
+  @name = name
+  @age = age
+  @location = location
+end
 ##
 
 ##
@@ -35,7 +43,8 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new("Dave", 32, "Ohio")
+location.dave = "Somerville"
 Response.dave = dave
 ##
 
@@ -47,7 +56,11 @@ Response.dave = dave
 ##
 # your response here
 ##
-
+class Developer < Person
+end
+def solve_problems
+  puts "think think think"
+end
 ##
 # Study the code below before responding.
 
@@ -81,7 +94,9 @@ end
 Response.housecat_noise = nil
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+I am a HouseCat, and I go 'meow'
+
+House cat is inheriting from the Animal class and displays the message ""I am a '#{self.class.name}', and I go '#{@sound}' @self and @sound is pointing to the House cats class and method.
 ##
 
 ##
@@ -102,10 +117,18 @@ module Carnivorous
       puts 'Yuck!'
     end
   end
-end
+
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+end
+
+def roar(roars)
+  if roars.class = Lion
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +136,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+Provides namespace and prevents name clashes
 ##
 
 ##
