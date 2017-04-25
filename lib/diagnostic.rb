@@ -26,7 +26,16 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+  def instantiate(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,8 +44,9 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
-Response.dave = dave
+dave = true
+Dave = person.new(name: 'Dave', age: 32, location: 'Ohio')
+Dave.location = 'Somerville'
 ##
 
 ##
@@ -45,7 +55,10 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer
+  def solve_problems
+    puts "think think think"
+  end
 ##
 
 ##
@@ -78,7 +91,7 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = I am a HouseCat, and I go 'meow'
 
 ## Explain why this would be the output, based on the method lookup chain.
 # your response as a comment here
@@ -105,7 +118,13 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+end
+
+def roar
+  puts "ROAR!"
+end
 ##
 
 # #
@@ -113,7 +132,8 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+The primary advantage of using mixins over inheritance is that Ruby allows
+you to use multiple mixins, whereas inheritance can only extend one class.
 ##
 
 ##
@@ -161,3 +181,7 @@ class ComboAttack
     end
   end
 end
+
+    class get_possible_moves
+      puts "kick, move, punch"
+    end
