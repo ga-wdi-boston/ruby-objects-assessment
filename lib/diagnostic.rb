@@ -129,7 +129,7 @@ class Lion < Cat
   include Carnivorous
 
   def roar
-    print 'ROAR!'
+    p 'ROAR!'
   end
 end
 ##
