@@ -152,14 +152,14 @@ end
 
 # ComboAttack Class definition
 class ComboAttack
-  ## NOTE: can't fix Error: Errno::ENOENT: No such file or directory - %w
+  ### NOTE: can't fix Error: Errno::ENOENT: No such file or directory - %w
 
-  attr_reader :moves, :damage
-
+  attr_accessor :moves, :damage, :punch, :move, :kick, :multiplier
   def initialize
     puts 'initialize'
     @moves = []
     @damage = 0
+    self
   end
 
   def punch
@@ -171,11 +171,13 @@ class ComboAttack
   end
 
   def move(direction)
+    puts 'move'
     @moves << "move #{direction}"
     self
   end
 
   def kick
+    puts 'kick'
     @moves << 'kick'
     @damage += 10
     @damage *= multiplier
@@ -185,10 +187,11 @@ class ComboAttack
   private
 
   def multiplier
+    puts 'multiplier'
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w[punch #{'move '+'left'} kick]
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w[kick punch up]
       2
     else
       1
