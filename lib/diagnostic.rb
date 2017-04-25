@@ -26,7 +26,17 @@ Response = OpenStruct.new
 # be writable.
 
 ##
-# your response here
+class Person
+  attr_accessor :name
+  attr_reader :age
+  attr_writer :location
+
+  def initialize(name, age, location)
+    @name = name
+    @age = age
+    @location = location
+  end
+end
 ##
 
 ##
@@ -35,7 +45,7 @@ Response = OpenStruct.new
 # "Somerville". Finally, assign the modified Person to `Response.dave` below.
 
 ## replace nil with your response, then continue your work on the next line
-dave = nil
+dave = Person.new(name: "Dave", age: 32, location: "Ohio")
 Response.dave = dave
 ##
 
@@ -45,7 +55,11 @@ Response.dave = dave
 # which returns the string "think think think".
 
 ##
-# your response here
+class Developer < Person
+  def solve_problems
+    puts "think think think"
+  end
+end
 ##
 
 ##
@@ -78,10 +92,14 @@ end
 
 ## What will be the output from calling `HouseCat.new.say_hello`?
 # replace nil with your response
-Response.housecat_noise = nil
+Response.housecat_noise = "I am a HouseCat, and I go 'meow'"
 
 ## Explain why this would be the output, based on the method lookup chain.
-# your response as a comment here
+
+# Since Cat inherits from Animal, and HouseCat inherits from Cat, then the
+# method "say_hello" can be used by HouseCat, and since say_hello refers to self, it
+# allows for HouseCat to reference itself and to use the instance @sound, since that
+# is referenced in both classes.
 ##
 
 ##
@@ -105,7 +123,12 @@ module Carnivorous
 end
 
 ##
-# your response here
+class Lion < Cat
+  include Carnivorous
+  def roar
+    puts "ROAR!"
+  end
+end
 ##
 
 # #
@@ -113,7 +136,10 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# It allows you to pass on some methods to similar classes, but not all.  Since
+# Lion is like a Cat in some ways, it should inherit some of the class methods
+# but since it also has things specific to a lio, mixins allow the Lion to be
+# similar to a Cat, but also have unique traits/methods.
 ##
 
 ##
@@ -125,7 +151,7 @@ end
 
 # ComboAttack Class definition
 class ComboAttack
-  attr_reader :moves, :damage
+  attr_accessor :moves, :damage
 
   def initialize
     @moves = []
@@ -148,13 +174,17 @@ class ComboAttack
     @damage *= multiplier
   end
 
+  def get_possible_moves
+    puts "kick, move, punch"
+  end
+
   private
 
   def multiplier
     case moves
-    when `%w`['punch', 'move left', 'kick']
+    when %w(punch move left kick)
       1.5
-    when `%w`['kick', 'punch', 'up']
+    when %w(kick punch up)
       2
     else
       1
