@@ -136,7 +136,7 @@ end
 # over using direct inheritance?
 
 ##
-# your response as a comment here
+# More flexibility.  You may want a class to be able to borrow a method from a mixin where it wouldn't make sense for one class to be a descendent of the other class.
 ##
 
 ##
